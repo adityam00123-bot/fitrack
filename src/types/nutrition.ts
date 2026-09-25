@@ -21,6 +21,9 @@ export interface FoodItem {
   fiber?: number;  // in grams
   isIndianSpecialty?: boolean;
   budgetRating?: 'budget' | 'moderate' | 'premium'; // e.g. Soya chunks = budget, Salmon = premium
+  mandiPricePer100g?: number; // Estimated local Mandi / retail price in INR per 100g
+  pricePerServing?: number;   // Estimated cost in INR for 1 serving
+  proteinPerRupee?: number;   // Grams of protein delivered per 1 INR spent (g/₹)
   benefits?: string;
   commonBrand?: string;
 }
@@ -38,6 +41,7 @@ export interface LoggedFoodItem {
   carbs: number;
   fat: number;
   fiber?: number;
+  estimatedCost?: number; // INR
 }
 
 export interface MealLog {
@@ -49,6 +53,7 @@ export interface MealLog {
   totalProtein: number;
   totalCarbs: number;
   totalFat: number;
+  totalCost?: number; // Estimated INR for this meal
 }
 
 export interface DailyMacroTarget {
@@ -70,6 +75,7 @@ export interface DailyNutritionSummary {
     fat: number;
     fiber: number;
     waterMl: number;
+    totalCost?: number;
   };
   meals: Record<MealType, LoggedFoodItem[]>;
 }

@@ -259,7 +259,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [foods, setFoods] = useState<FoodItem[]>(() => {
     const saved = localStorage.getItem('fitrack_foods');
     if (saved) {
-      try { return JSON.parse(saved); } catch { /* ignore */ }
+      try {
+        const parsed = JSON.parse(saved) as FoodItem[];
+        // Merge missing Mandi price & proteinPerRupee fields from updated database
+        return parsed.map(p => {
+          const defaultItem = INDIAN_FOOD_DATABASE.find(d => d.id === p.id);
+          if (defaultItem) {
+            return {
+              ...p,
+              mandiPricePer100g: p.mandiPricePer100g ?? defaultItem.mandiPricePer100g,
+              pricePerServing: p.pricePerServing ?? defaultItem.pricePerServing,
+              proteinPerRupee: p.proteinPerRupee ?? defaultItem.proteinPerRupee
+            };
+          }
+          return p;
+        });
+      } catch { /* ignore */ }
     }
     return INDIAN_FOOD_DATABASE;
   });
@@ -785,6 +800,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const addFoodToMeal = (mealType: MealType, food: FoodItem, quantity: number) => {
     soundEffects.playTick();
+    const costPerServing = food.pricePerServing ?? (food.mandiPricePer100g ? (food.mandiPricePer100g / 100) * food.servingSizeGrams : 0);
+    const itemCost = parseFloat((costPerServing * quantity).toFixed(1));
+
     const itemToAdd: LoggedFoodItem = {
       id: `item-${Date.now()}`,
       foodId: food.id,
@@ -797,7 +815,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       protein: parseFloat((food.protein * quantity).toFixed(1)),
       carbs: parseFloat((food.carbs * quantity).toFixed(1)),
       fat: parseFloat((food.fat * quantity).toFixed(1)),
-      fiber: food.fiber ? parseFloat((food.fiber * quantity).toFixed(1)) : 0
+      fiber: food.fiber ? parseFloat((food.fiber * quantity).toFixed(1)) : 0,
+      estimatedCost: itemCost
     };
 
     setMealLogs(prev => {
@@ -810,7 +829,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           totalCalories: updatedItems.reduce((acc, it) => acc + it.calories, 0),
           totalProtein: parseFloat(updatedItems.reduce((acc, it) => acc + it.protein, 0).toFixed(1)),
           totalCarbs: parseFloat(updatedItems.reduce((acc, it) => acc + it.carbs, 0).toFixed(1)),
-          totalFat: parseFloat(updatedItems.reduce((acc, it) => acc + it.fat, 0).toFixed(1))
+          totalFat: parseFloat(updatedItems.reduce((acc, it) => acc + it.fat, 0).toFixed(1)),
+          totalCost: parseFloat(updatedItems.reduce((acc, it) => acc + (it.estimatedCost || 0), 0).toFixed(1))
         } : m);
       } else {
         const newLog: MealLog = {
@@ -821,7 +841,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           totalCalories: itemToAdd.calories,
           totalProtein: itemToAdd.protein,
           totalCarbs: itemToAdd.carbs,
-          totalFat: itemToAdd.fat
+          totalFat: itemToAdd.fat,
+          totalCost: itemCost
         };
         return [...prev, newLog];
       }
@@ -839,7 +860,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           totalCalories: filtered.reduce((acc, it) => acc + it.calories, 0),
           totalProtein: parseFloat(filtered.reduce((acc, it) => acc + it.protein, 0).toFixed(1)),
           totalCarbs: parseFloat(filtered.reduce((acc, it) => acc + it.carbs, 0).toFixed(1)),
-          totalFat: parseFloat(filtered.reduce((acc, it) => acc + it.fat, 0).toFixed(1))
+          totalFat: parseFloat(filtered.reduce((acc, it) => acc + it.fat, 0).toFixed(1)),
+          totalCost: parseFloat(filtered.reduce((acc, it) => acc + (it.estimatedCost || 0), 0).toFixed(1))
         };
       }).filter(m => m.items.length > 0);
     });

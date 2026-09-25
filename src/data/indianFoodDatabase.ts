@@ -17,7 +17,10 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 6.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
-    benefits: 'The ultimate budget protein source in India! Over 52% protein by dry weight. High leucine & glutamine.'
+    mandiPricePer100g: 15.0,
+    pricePerServing: 7.5,
+    proteinPerRupee: 3.47,
+    benefits: 'The ultimate budget protein champion in India! Over 52% protein by dry weight. High leucine & glutamine.'
   },
   {
     id: 'food-paneer-raw',
@@ -34,6 +37,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 42.0,
+    pricePerServing: 42.0,
+    proteinPerRupee: 0.44,
     benefits: 'Rich in casein protein for slow release during sleep. High in calcium and healthy milk fats.'
   },
   {
@@ -51,6 +57,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 48.0,
+    pricePerServing: 48.0,
+    proteinPerRupee: 0.52,
     benefits: 'Highest protein-to-calorie ratio for vegetarians during cutting and fat-loss phases.'
   },
   {
@@ -68,6 +77,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 1.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 20.0,
+    pricePerServing: 20.0,
+    proteinPerRupee: 0.70,
     benefits: '100% plant-based paneer substitute with zero cholesterol and complete amino acid profile.'
   },
   {
@@ -85,6 +97,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 8.0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 12.0,
+    pricePerServing: 6.0,
+    proteinPerRupee: 1.92,
     benefits: 'Desi Indian superfood! Cooling digestive drink, rich in insoluble fiber and complex carbs.'
   },
   {
@@ -102,6 +117,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 8.0,
+    pricePerServing: 12.0,
+    proteinPerRupee: 0.50,
     benefits: 'Probiotic powerhouse for gut microbiome, nutrient absorption, and bloat reduction.'
   },
   {
@@ -119,6 +137,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 22.0,
+    pricePerServing: 22.0,
+    proteinPerRupee: 0.48,
     benefits: 'Concentrated protein curd with strained whey, smooth creamy texture.'
   },
   {
@@ -136,6 +157,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 4.0,
+    pricePerServing: 10.0,
+    proteinPerRupee: 0.35,
     benefits: 'Instant hydration, zero bloating, replenishes lost electrolytes in Indian summers.'
   },
   {
@@ -153,6 +177,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: false,
     budgetRating: 'moderate',
+    mandiPricePer100g: 227.0,
+    pricePerServing: 75.0,
+    proteinPerRupee: 0.33,
     benefits: 'Fastest absorbing protein with 5.5g BCAA per scoop, perfect for post-workout window.'
   },
 
@@ -172,6 +199,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 14.0,
+    pricePerServing: 7.0,
+    proteinPerRupee: 0.90,
     benefits: 'Gold standard biological value (BV 100). Choline, vitamin D, and lutein.'
   },
   {
@@ -189,6 +219,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 21.0,
+    pricePerServing: 3.5,
+    proteinPerRupee: 1.09,
     benefits: 'Pure lean protein, zero fat and zero cholesterol.'
   },
   {
@@ -206,6 +239,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 1.0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 16.0,
+    pricePerServing: 24.0,
+    proteinPerRupee: 0.56,
     benefits: 'Quick 5-minute breakfast loaded with onions, tomatoes, and green chilies.'
   },
   {
@@ -223,6 +259,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 28.0,
+    pricePerServing: 28.0,
+    proteinPerRupee: 0.93,
     benefits: 'The king of lean non-veg bodybuilding protein in India.'
   },
   {
@@ -240,6 +279,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0.8,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 35.0,
+    pricePerServing: 52.5,
+    proteinPerRupee: 0.61,
     benefits: 'Clay oven roasted with curd and spices, high protein, minimal oil!'
   },
   {
@@ -257,6 +299,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 1.5,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 24.0,
+    pricePerServing: 48.0,
+    proteinPerRupee: 0.58,
     benefits: 'Satisfying home meal made with onion, tomato, and ginger-garlic paste.'
   },
   {
@@ -274,6 +319,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0.5,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 25.0,
+    pricePerServing: 45.0,
+    proteinPerRupee: 0.53,
     benefits: 'Rich in Omega-3 fatty acids for joint recovery and cardiovascular health.'
   },
 
@@ -293,6 +341,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 4.8,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 8.0,
+    pricePerServing: 12.0,
+    proteinPerRupee: 0.60,
     benefits: 'Staple comfort food; pair with rice or roti for complete amino acid profiling.'
   },
   {
@@ -310,6 +361,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 5.2,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 9.0,
+    pricePerServing: 13.5,
+    proteinPerRupee: 0.63,
     benefits: 'Easiest dal to digest, lowest gas formation, ideal for sensitive stomachs.'
   },
   {
@@ -327,6 +381,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 6.8,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 10.0,
+    pricePerServing: 15.0,
+    proteinPerRupee: 0.60,
     benefits: 'Low glycemic index, sustained energy release for intense workouts.'
   },
   {
@@ -344,6 +401,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 6.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 11.0,
+    pricePerServing: 16.5,
+    proteinPerRupee: 0.53,
     benefits: 'Packed with iron, potassium, magnesium, and resistant starch.'
   },
   {
@@ -361,6 +421,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 7.6,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 9.0,
+    pricePerServing: 9.0,
+    proteinPerRupee: 0.99,
     benefits: 'Traditional desi wrestler (pehlwan) food for raw endurance and stamina.'
   },
   {
@@ -378,6 +441,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 5.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 12.0,
+    pricePerServing: 12.0,
+    proteinPerRupee: 0.65,
     benefits: 'Sprouting doubles vitamin C content, activates live enzymes, enhances bioavailability.'
   },
 
@@ -397,6 +463,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.3,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 8.0,
+    pricePerServing: 3.2,
+    proteinPerRupee: 0.97,
     benefits: 'The backbone of Indian diets; 100% whole wheat complex carbs.'
   },
   {
@@ -414,6 +483,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.3,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 12.0,
+    pricePerServing: 5.2,
+    proteinPerRupee: 0.60,
     benefits: 'A touch of ghee lowers the glycemic index of roti, preventing insulin spikes.'
   },
   {
@@ -431,6 +503,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 3.8,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 11.0,
+    pricePerServing: 4.4,
+    proteinPerRupee: 1.02,
     benefits: 'Higher protein & fiber than normal wheat roti; keeps hunger suppressed for 4+ hours.'
   },
   {
@@ -448,6 +523,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 3.2,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 10.0,
+    pricePerServing: 4.5,
+    proteinPerRupee: 0.78,
     benefits: 'Gluten-free ancient millet; cooling for summer, aids weight loss.'
   },
   {
@@ -465,6 +543,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 3.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 9.0,
+    pricePerServing: 4.0,
+    proteinPerRupee: 0.95,
     benefits: 'High iron and magnesium millet; warm energetic staple for winter strength.'
   },
   {
@@ -482,6 +563,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0.6,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 6.0,
+    pricePerServing: 9.0,
+    proteinPerRupee: 0.46,
     benefits: 'Quickly digestible carb source, ideal for pre/post-workout glycogen replenishment.'
   },
   {
@@ -499,6 +583,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.8,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 9.0,
+    pricePerServing: 13.5,
+    proteinPerRupee: 0.32,
     benefits: 'Bran and germ intact; provides manganese, selenium, and steady blood glucose.'
   },
   {
@@ -516,6 +603,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 4.2,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 8.0,
+    pricePerServing: 20.0,
+    proteinPerRupee: 0.53,
     benefits: 'Ayurvedic tridoshic super-meal; easiest complete protein meal for post-workout recovery.'
   },
   {
@@ -533,6 +623,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 8.0,
+    pricePerServing: 14.4,
+    proteinPerRupee: 0.38,
     benefits: 'Naturally iron-rich breakfast due to traditional flattening process.'
   },
   {
@@ -550,6 +643,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 7.0,
+    pricePerServing: 12.6,
+    proteinPerRupee: 0.40,
     benefits: 'Light savory South Indian semolina dish cooked with mustard seeds and curry leaves.'
   },
   {
@@ -567,6 +663,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 1.8,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 9.0,
+    pricePerServing: 9.0,
+    proteinPerRupee: 0.47,
     benefits: 'Zero added oil; fermented batter enhances B-vitamins and gut friendliness.'
   },
   {
@@ -584,6 +683,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 1.2,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 12.0,
+    pricePerServing: 9.6,
+    proteinPerRupee: 0.36,
     benefits: 'Crisp fermented crepe; combine with sambar for better amino balance.'
   },
   {
@@ -601,6 +703,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 3.2,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 14.0,
+    pricePerServing: 8.4,
+    proteinPerRupee: 0.81,
     benefits: 'Top choice high-protein veg breakfast; quick to make with coriander, onion, and ajwain.'
   },
   {
@@ -618,6 +723,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 6.0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 10.0,
+    pricePerServing: 20.0,
+    proteinPerRupee: 0.38,
     benefits: 'Beta-glucan soluble fiber reduces LDL cholesterol and manages satiety.'
   },
 
@@ -637,6 +745,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 5.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 18.0,
+    pricePerServing: 7.2,
+    proteinPerRupee: 1.18,
     benefits: 'Pocket-friendly gym snack! Zero prep required, crisp crunch, curbs cravings.'
   },
   {
@@ -654,6 +765,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.5,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 60.0,
+    pricePerServing: 18.0,
+    proteinPerRupee: 0.17,
     benefits: 'Super-low calorie high volume snack; high in magnesium and anti-aging flavonoids.'
   },
   {
@@ -671,6 +785,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.5,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 18.0,
+    pricePerServing: 5.4,
+    proteinPerRupee: 1.44,
     benefits: 'Desi almond substitute at 1/5th the cost! High monounsaturated fats and arginine.'
   },
   {
@@ -688,6 +805,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 2.0,
     isIndianSpecialty: false,
     budgetRating: 'budget',
+    mandiPricePer100g: 40.0,
+    pricePerServing: 12.8,
+    proteinPerRupee: 0.63,
     benefits: 'Dense clean calories for lean bulking and muscle growth.'
   },
   {
@@ -705,6 +825,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 1.5,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 95.0,
+    pricePerServing: 11.4,
+    proteinPerRupee: 0.23,
     benefits: 'Rich in Vitamin E for muscle membrane repair and hormone health.'
   },
 
@@ -724,6 +847,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 4.5,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 16.0,
+    pricePerServing: 32.0,
+    proteinPerRupee: 0.38,
     benefits: 'Synergy of spinach iron & paneer protein, high lutein and calcium.'
   },
   {
@@ -741,6 +867,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 4.0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 12.0,
+    pricePerServing: 14.4,
+    proteinPerRupee: 0.17,
     benefits: 'High mucilage content that protects stomach lining and helps blood sugar regulation.'
   },
   {
@@ -758,6 +887,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 5.0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 10.0,
+    pricePerServing: 15.0,
+    proteinPerRupee: 0.23,
     benefits: 'Broad spectrum micronutrients, vitamin A, and prebiotic fiber.'
   },
 
@@ -777,6 +909,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 6.5,
+    pricePerServing: 16.25,
+    proteinPerRupee: 0.49,
     benefits: 'Balanced ratio of whey and casein; easy night beverage for recovery.'
   },
   {
@@ -794,6 +929,9 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'moderate',
+    mandiPricePer100g: 65.0,
+    pricePerServing: 3.25,
+    proteinPerRupee: 0.0,
     benefits: 'Rich in butyric acid, fat-soluble vitamins (A, D, E, K), and joint lubrication.'
   },
   {
@@ -811,6 +949,29 @@ export const INDIAN_FOOD_DATABASE: FoodItem[] = [
     fiber: 0,
     isIndianSpecialty: true,
     budgetRating: 'budget',
+    mandiPricePer100g: 16.0,
+    pricePerServing: 0.8,
+    proteinPerRupee: 0.0,
     benefits: 'Favorable omega-3 to omega-6 ratio, traditional Indian cooking oil.'
   }
 ];
+
+export const calculateProteinPerRupee = (item: FoodItem): number => {
+  if (item.proteinPerRupee !== undefined && item.proteinPerRupee > 0) {
+    return item.proteinPerRupee;
+  }
+  if (item.pricePerServing && item.pricePerServing > 0) {
+    return parseFloat((item.protein / item.pricePerServing).toFixed(2));
+  }
+  if (item.mandiPricePer100g && item.mandiPricePer100g > 0 && item.servingSizeGrams > 0) {
+    const cost = (item.mandiPricePer100g / 100) * item.servingSizeGrams;
+    return parseFloat((item.protein / cost).toFixed(2));
+  }
+  return 0;
+};
+
+export const getProteinLeaderboard = (foods: FoodItem[] = INDIAN_FOOD_DATABASE): FoodItem[] => {
+  return [...foods]
+    .filter(f => f.protein > 0)
+    .sort((a, b) => calculateProteinPerRupee(b) - calculateProteinPerRupee(a));
+};

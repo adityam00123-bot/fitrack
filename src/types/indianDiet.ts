@@ -20,7 +20,15 @@ export interface PlannedMeal {
   totalProtein: number;
   totalCarbs: number;
   totalFat: number;
+  estimatedCost?: number;
   desiProTip?: string;
+}
+
+export interface ShoppingItem {
+  item: string;
+  quantity: string;
+  estimatedPrice: number;
+  category: string;
 }
 
 export interface IndianDietPlan {
@@ -40,6 +48,10 @@ export interface IndianDietPlan {
   meals: PlannedMeal[];
   tipsForSuccess: string[];
   isCustomGenerated?: boolean;
+  weeklySchedule?: Record<string, PlannedMeal[]>;
+  weeklyGroceryBudget?: number;
+  estimatedDailyCost?: number;
+  weeklyShoppingItems?: ShoppingItem[];
 }
 
 export interface FoodSwapItem {

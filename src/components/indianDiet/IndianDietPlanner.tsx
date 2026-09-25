@@ -60,7 +60,7 @@ export const IndianDietPlanner: React.FC = () => {
           }`}
         >
           <Wand2 className="w-4 h-4" />
-          <span>Diet Plan Generator</span>
+          <span>7-Day Budget Generator</span>
         </button>
 
         <button
@@ -84,7 +84,7 @@ export const IndianDietPlanner: React.FC = () => {
           }`}
         >
           <Database className="w-4 h-4" />
-          <span>Desi Food Database</span>
+          <span>Protein/₹ Mandi Index</span>
         </button>
       </div>
 
