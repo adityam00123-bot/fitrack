@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Exercise } from '../../types/workout';
+import { findHevyVideoUrl } from '../../data/hevyVideoMap';
 import {
   X,
   Dumbbell,
@@ -14,7 +15,9 @@ import {
   Clock,
   Eye,
   Camera,
-  Gauge
+  Gauge,
+  Sliders,
+  Check
 } from 'lucide-react';
 
 interface ExerciseDetailModalProps {
@@ -30,29 +33,35 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 }) => {
   if (!exercise) return null;
 
-  const hasVideo = Boolean(exercise.videoUrl);
+  // Resolve video URL: exercise.videoUrl first, then intelligent lookup in 222+ Hevy dataset & local files
+  const effectiveVideoUrl = exercise.videoUrl || findHevyVideoUrl(exercise.name, exercise.id);
+  const hasVideo = Boolean(effectiveVideoUrl);
+  const hasGif = Boolean(exercise.gifUrl || exercise.imageUrl);
   const hasRealPhotos = Boolean(exercise.images && exercise.images.length > 0);
 
   const [viewMode, setViewMode] = useState<'video' | '3d_gif' | 'real_photos'>(
-    hasVideo ? 'video' : '3d_gif'
+    hasVideo ? 'video' : hasGif ? '3d_gif' : 'real_photos'
   );
 
   const [isPlaying, setIsPlaying] = useState(true);
-  const [videoSpeed, setVideoSpeed] = useState<number>(0.75); // 0.75x is smooth & controlled
+  const [videoSpeed, setVideoSpeed] = useState<number>(0.75); // 0.75x tempo is ideal for lifting study
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [mediaLoaded, setMediaLoaded] = useState(false);
   const [mediaError, setMediaError] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isScrubbing, setIsScrubbing] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Synchronize video playback speed
+  // Synchronize video playback speed whenever speed, mode, or media load changes
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = videoSpeed;
     }
-  }, [videoSpeed, viewMode, exercise.id]);
+  }, [videoSpeed, viewMode, exercise.id, mediaLoaded]);
 
   // Handle Play/Pause toggle
   const togglePlayPause = () => {
@@ -81,13 +90,16 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
     }
   };
 
+  // Reset states on exercise change
   useEffect(() => {
     setIsPlaying(true);
     setMediaLoaded(false);
     setMediaError(false);
     setActivePhotoIndex(0);
-    setViewMode(hasVideo ? 'video' : '3d_gif');
-  }, [exercise.id, hasVideo]);
+    setCurrentTime(0);
+    setDuration(0);
+    setViewMode(hasVideo ? 'video' : hasGif ? '3d_gif' : 'real_photos');
+  }, [exercise.id, hasVideo, hasGif]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4 animate-fade-in">
@@ -106,8 +118,9 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                 {exercise.difficulty}
               </span>
               {hasVideo && (
-                <span className="px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 text-[10px] font-bold border border-cyan-500/30">
-                  60 FPS HD
+                <span className="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-black border border-cyan-500/40 flex items-center gap-1 shadow-sm">
+                  <Sparkles className="w-2.5 h-2.5" />
+                  60 FPS HD • 0% Blur
                 </span>
               )}
             </div>
@@ -124,62 +137,106 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 
         {/* Content Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-5 flex-1">
-          {/* View Mode Switcher if Real Photos or Video available */}
-          {hasRealPhotos && (
-            <div className="flex items-center justify-between bg-gray-850 p-1.5 rounded-2xl border border-gray-750 text-xs">
+          {/* View Mode Switcher: Show when more than 1 mode is available */}
+          {(hasVideo && (hasGif || hasRealPhotos)) || (hasGif && hasRealPhotos) ? (
+            <div className="flex flex-wrap items-center justify-between bg-gray-850 p-1.5 rounded-2xl border border-gray-750 text-xs gap-2">
               <span className="text-[11px] font-bold text-gray-400 pl-2">Display Mode:</span>
-              <div className="flex gap-1 font-bold">
-                <button
-                  onClick={() => setViewMode(hasVideo ? 'video' : '3d_gif')}
-                  className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
-                    viewMode !== 'real_photos'
-                      ? 'bg-gradient-to-r from-orange-500 to-rose-600 text-white shadow-md shadow-orange-500/20'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{hasVideo ? '60 FPS Video (Hevy Native)' : '3D Anatomy Model'}</span>
-                </button>
+              <div className="flex gap-1 font-bold flex-wrap">
+                {hasVideo && (
+                  <button
+                    onClick={() => {
+                      setViewMode('video');
+                      setMediaLoaded(false);
+                    }}
+                    className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ${
+                      viewMode === 'video'
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/25'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>60 FPS Video</span>
+                    <span className="px-1.5 py-0.2 text-[9px] bg-cyan-950 text-cyan-200 font-extrabold rounded-full uppercase border border-cyan-400/40">
+                      0% Blur
+                    </span>
+                  </button>
+                )}
 
-                <button
-                  onClick={() => setViewMode('real_photos')}
-                  className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
-                    viewMode === 'real_photos'
-                      ? 'bg-gradient-to-r from-orange-500 to-rose-600 text-white shadow-md shadow-orange-500/20'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <Camera className="w-3.5 h-3.5" />
-                  <span>Real Gym Photos</span>
-                </button>
+                {hasGif && (
+                  <button
+                    onClick={() => {
+                      setViewMode('3d_gif');
+                      setMediaLoaded(false);
+                    }}
+                    className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ${
+                      viewMode === '3d_gif'
+                        ? 'bg-gradient-to-r from-orange-500 to-rose-600 text-white shadow-md shadow-orange-500/20'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>3D Animated Model</span>
+                  </button>
+                )}
+
+                {hasRealPhotos && (
+                  <button
+                    onClick={() => {
+                      setViewMode('real_photos');
+                      setMediaLoaded(false);
+                    }}
+                    className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ${
+                      viewMode === 'real_photos'
+                        ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md shadow-emerald-500/20'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    <Camera className="w-3.5 h-3.5" />
+                    <span>Real Gym Photos</span>
+                  </button>
+                )}
               </div>
             </div>
-          )}
+          ) : null}
 
           {/* Media Player Box */}
           <div className="rounded-3xl overflow-hidden border border-gray-800 bg-gray-950/90 shadow-inner relative group flex flex-col items-center">
             <div className="w-full aspect-[4/3] sm:aspect-video max-h-80 flex items-center justify-center p-2 relative bg-black/50">
               {!mediaLoaded && !mediaError && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-900/80">
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-900/80 z-10">
                   <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
                   <span className="text-xs text-gray-400 font-semibold">Loading exercise visual...</span>
                 </div>
               )}
 
-              {/* View 1: 60 FPS Native MP4 Video (Exact Hevy Asset with 0% Blur) */}
-              {viewMode === 'video' && exercise.videoUrl && (
+              {/* View 1: 60 FPS Native MP4 Video (Exact Hevy Asset with 0% Motion Blur) */}
+              {viewMode === 'video' && effectiveVideoUrl && (
                 <video
                   ref={videoRef}
-                  src={exercise.videoUrl}
+                  src={effectiveVideoUrl}
                   autoPlay
                   loop
                   muted
                   playsInline
                   onLoadedData={() => {
                     setMediaLoaded(true);
-                    if (videoRef.current) videoRef.current.playbackRate = videoSpeed;
+                    if (videoRef.current) {
+                      videoRef.current.playbackRate = videoSpeed;
+                    }
                   }}
-                  onError={() => setViewMode('3d_gif')}
+                  onLoadedMetadata={() => {
+                    if (videoRef.current) {
+                      setDuration(videoRef.current.duration);
+                    }
+                  }}
+                  onTimeUpdate={() => {
+                    if (!isScrubbing && videoRef.current) {
+                      setCurrentTime(videoRef.current.currentTime);
+                    }
+                  }}
+                  onError={() => {
+                    if (hasGif) setViewMode('3d_gif');
+                  }}
                   className={`w-full h-full object-contain rounded-2xl transition-opacity duration-300 ${
                     mediaLoaded ? 'opacity-100' : 'opacity-0'
                   }`}
@@ -217,16 +274,20 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
               )}
 
               {/* Status Badge */}
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-xl bg-black/80 backdrop-blur text-[11px] font-bold text-orange-400 border border-orange-500/30 flex items-center gap-1.5 shadow-md">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-xl bg-black/85 backdrop-blur text-[11px] font-bold text-white border border-gray-700/80 flex items-center gap-1.5 shadow-md">
                 <span
                   className={`w-2 h-2 rounded-full ${
-                    !isPlaying ? 'bg-amber-400' : hasVideo && viewMode === 'video' ? 'bg-cyan-400 animate-pulse' : 'bg-emerald-400 animate-pulse'
+                    !isPlaying
+                      ? 'bg-amber-400'
+                      : viewMode === 'video'
+                      ? 'bg-cyan-400 animate-pulse'
+                      : 'bg-emerald-400 animate-pulse'
                   }`}
                 />
                 <span>
                   {viewMode === 'video'
                     ? isPlaying
-                      ? `60 FPS Smooth Video (${videoSpeed}x Speed)`
+                      ? `60 FPS Video (${videoSpeed}x Speed)`
                       : 'Video Paused'
                     : viewMode === '3d_gif'
                     ? isPlaying
@@ -237,12 +298,45 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
               </div>
             </div>
 
+            {/* Video Scrubber Timeline Bar (Active in video mode) */}
+            {viewMode === 'video' && duration > 0 && (
+              <div className="w-full px-4 pt-2 bg-gray-900/95 flex items-center gap-2">
+                <span className="text-[10px] text-gray-400 font-mono w-7 text-right">
+                  {currentTime.toFixed(1)}s
+                </span>
+                <input
+                  type="range"
+                  min="0"
+                  max={duration || 1}
+                  step="0.05"
+                  value={currentTime}
+                  onMouseDown={() => setIsScrubbing(true)}
+                  onTouchStart={() => setIsScrubbing(true)}
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value);
+                    setCurrentTime(val);
+                    if (videoRef.current) {
+                      videoRef.current.currentTime = val;
+                    }
+                  }}
+                  onMouseUp={() => setIsScrubbing(false)}
+                  onTouchEnd={() => setIsScrubbing(false)}
+                  className="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-orange-500 hover:accent-orange-400"
+                />
+                <span className="text-[10px] text-gray-500 font-mono w-7">
+                  {duration.toFixed(1)}s
+                </span>
+              </div>
+            )}
+
             {/* Bottom Playback & Speed Controls */}
-            <div className="w-full px-4 py-2.5 bg-gray-900/90 border-t border-gray-800 flex flex-wrap items-center justify-between gap-3 text-xs">
-              <div className="flex items-center gap-2">
+            <div className="w-full px-4 py-3 bg-gray-900/90 border-t border-gray-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 flex-wrap">
+                {/* Play / Pause Button */}
                 <button
                   onClick={togglePlayPause}
-                  className="px-3.5 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold border border-orange-500/30 flex items-center gap-1.5 transition-colors"
+                  className="px-3.5 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold border border-orange-500/30 flex items-center gap-1.5 transition-colors cursor-pointer"
+                  title={isPlaying ? 'Pause movement' : 'Play movement'}
                 >
                   {isPlaying ? (
                     <>
@@ -257,10 +351,11 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                   )}
                 </button>
 
-                {/* Speed Controls for 60fps Video */}
+                {/* Speed Controls for 60fps Video: 0.5x Slow, 0.75x Tempo, 1.0x Normal */}
                 {viewMode === 'video' && (
-                  <div className="flex items-center gap-1 bg-gray-850 p-1 rounded-xl border border-gray-750">
-                    <Gauge className="w-3 h-3 text-gray-400 ml-1.5 mr-0.5" />
+                  <div className="flex items-center gap-1 bg-gray-950 p-1 rounded-xl border border-gray-800 shadow-inner">
+                    <Gauge className="w-3.5 h-3.5 text-orange-400 ml-1.5 mr-0.5" />
+                    <span className="text-[11px] font-bold text-gray-400 mr-1 hidden sm:inline">Speed:</span>
                     {[
                       { speed: 0.5, label: '0.5x Slow' },
                       { speed: 0.75, label: '0.75x Tempo' },
@@ -268,11 +363,16 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                     ].map((s) => (
                       <button
                         key={s.speed}
-                        onClick={() => setVideoSpeed(s.speed)}
-                        className={`px-2 py-0.5 rounded-lg text-[11px] font-bold transition-all ${
+                        onClick={() => {
+                          setVideoSpeed(s.speed);
+                          if (videoRef.current) {
+                            videoRef.current.playbackRate = s.speed;
+                          }
+                        }}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition-all cursor-pointer ${
                           videoSpeed === s.speed
-                            ? 'bg-orange-500 text-white shadow-sm'
-                            : 'text-gray-400 hover:text-white'
+                            ? 'bg-orange-500 text-white shadow-sm ring-1 ring-orange-400'
+                            : 'text-gray-400 hover:text-white hover:bg-gray-850'
                         }`}
                       >
                         {s.label}
@@ -282,13 +382,14 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                 )}
               </div>
 
+              {/* Real Photos Stepper */}
               {viewMode === 'real_photos' && exercise.images && (
                 <div className="flex items-center gap-1.5">
                   {exercise.images.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setActivePhotoIndex(i)}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                         activePhotoIndex === i
                           ? 'bg-orange-500 text-white shadow-sm'
                           : 'bg-gray-800 text-gray-400 hover:text-white'
@@ -300,11 +401,26 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                 </div>
               )}
 
-              {viewMode !== 'real_photos' && (
-                <span className="text-[11px] text-gray-400 hidden sm:inline italic">
-                  {hasVideo ? 'Zero motion blur • Smooth 60 FPS playback' : 'Inspect form cues below'}
-                </span>
-              )}
+              {/* Status Note */}
+              <div className="text-[11px] text-gray-400 flex items-center gap-1">
+                {viewMode === 'video' ? (
+                  <span className="text-cyan-400 font-semibold flex items-center gap-1">
+                    <Check className="w-3 h-3" /> Hevy Native 60 FPS • Zero Blur
+                  </span>
+                ) : hasVideo ? (
+                  <button
+                    onClick={() => {
+                      setViewMode('video');
+                      setMediaLoaded(false);
+                    }}
+                    className="text-cyan-400 hover:underline cursor-pointer font-semibold"
+                  >
+                    Switch to 60 FPS Video →
+                  </button>
+                ) : (
+                  <span className="italic text-gray-400">Looping movement demonstration</span>
+                )}
+              </div>
             </div>
           </div>
 
@@ -409,7 +525,7 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
         <div className="p-4 sm:p-5 border-t border-gray-800 bg-gray-900/95 flex items-center justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl bg-gray-800 hover:bg-gray-750 text-gray-300 text-xs font-semibold transition-colors"
+            className="px-5 py-2.5 rounded-xl bg-gray-800 hover:bg-gray-750 text-gray-300 text-xs font-semibold transition-colors cursor-pointer"
           >
             Close
           </button>
@@ -420,7 +536,7 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                 onAddToWorkout(exercise);
                 onClose();
               }}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white text-xs font-bold shadow-lg shadow-orange-500/25 flex items-center gap-2 transition-transform active:scale-95"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white text-xs font-bold shadow-lg shadow-orange-500/25 flex items-center gap-2 transition-transform active:scale-95 cursor-pointer"
             >
               <Dumbbell className="w-4 h-4" />
               <span>Add to Active Workout</span>

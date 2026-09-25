@@ -151,24 +151,39 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   });
 
-  // Exercises (1,350+ smooth full-motion animated GIFs + curated staple lifts)
+  // Exercises (1,350+ smooth full-motion animated GIFs + curated staple lifts with 60FPS MP4 videos)
   const [exercises, setExercises] = useState<Exercise[]>(() => {
     const saved = localStorage.getItem('fitrack_exercises');
-    if (saved) {
+    const CACHE_VERSION_KEY = 'fitrack_exercises_v3_videos';
+    const hasV3 = localStorage.getItem(CACHE_VERSION_KEY);
+
+    if (saved && hasV3) {
       try {
         const parsed: Exercise[] = JSON.parse(saved);
-        // If cached list is missing animated GIFs on staple lifts or has older/smaller library, upgrade it!
-        const hasGifs = Array.isArray(parsed) && parsed.length > 0 && Boolean(parsed[0]?.gifUrl);
-        if (hasGifs && parsed.length >= INITIAL_EXERCISES.length) {
+        // Ensure cache has 60fps videoUrl on staple lifts and full library size
+        const hasVideos = Array.isArray(parsed) && parsed.length > 0 && parsed.some((e) => Boolean(e.videoUrl));
+        if (hasVideos && parsed.length >= INITIAL_EXERCISES.length) {
           return parsed;
-        } else if (Array.isArray(parsed)) {
-          // Preserve custom user-added exercises while upgrading to 1,350+ animated GIF library
-          const custom = parsed.filter((e) => e.isCustom);
-          return [...INITIAL_EXERCISES, ...custom];
         }
       } catch { /* ignore */ }
     }
-    return INITIAL_EXERCISES;
+
+    // Auto-upgrade cache to ensure 60fps videos and full library are populated
+    try {
+      let custom: Exercise[] = [];
+      if (saved) {
+        const parsed: Exercise[] = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          custom = parsed.filter((e) => e.isCustom);
+        }
+      }
+      const updated = [...INITIAL_EXERCISES, ...custom];
+      localStorage.setItem('fitrack_exercises', JSON.stringify(updated));
+      localStorage.setItem(CACHE_VERSION_KEY, 'true');
+      return updated;
+    } catch {
+      return INITIAL_EXERCISES;
+    }
   });
 
   // Routines

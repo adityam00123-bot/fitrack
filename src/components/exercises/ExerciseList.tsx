@@ -315,12 +315,17 @@ export const ExerciseList: React.FC = () => {
                         className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
-                      {(exercise.images && exercise.images.length > 1) && (
+                      {exercise.videoUrl ? (
+                        <div className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/90 text-[8px] font-black text-cyan-300 flex items-center gap-1 border border-cyan-500/40 shadow-sm">
+                          <Play className="w-2 h-2 fill-cyan-400" />
+                          <span>60 FPS</span>
+                        </div>
+                      ) : (exercise.gifUrl || (exercise.images && exercise.images.length > 1)) ? (
                         <div className="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-black/80 text-[8px] font-black text-orange-400 flex items-center gap-0.5 border border-orange-500/30">
                           <Play className="w-2 h-2 fill-orange-400" />
                           <span>GIF</span>
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   )}
 

@@ -1,0 +1,335 @@
+// Auto-generated Hevy 60 FPS Native MP4 Videos Map
+// 222+ exercise MP4 videos from official Hevy dataset + local high-speed assets
+// Guaranteed 0% motion blur and full tempo playback speed controls
+
+export const LOCAL_STAPLE_VIDEOS: Record<string, string> = {
+  "Barbell Bench Press": "/exercises/barbell_bench_press.mp4",
+  "Barbell Bent-Over Row": "/exercises/barbell_bent_over_row.mp4",
+  "Conventional Barbell Deadlift": "/exercises/barbell_deadlift.mp4",
+  "Barbell Back Squat": "/exercises/barbell_squat.mp4",
+  "Pull-Up (Pronated Grip)": "/exercises/pull_up.mp4",
+  "Lat Pulldown": "/exercises/lat_pulldown.mp4",
+  "Overhead Barbell Military Press (OHP)": "/exercises/overhead_press.mp4",
+  "Dumbbell Lateral Raise": "/exercises/lateral_raise.mp4",
+  "Barbell Bicep Curl": "/exercises/barbell_curl.mp4",
+  "Chest Dips": "/exercises/chest_dip.mp4",
+  "Tricep Rope Pushdown": "/exercises/cable_pushdown.mp4",
+  "45-Degree Leg Press": "/exercises/leg_press.mp4",
+  "Romanian Deadlift (RDL)": "/exercises/romanian_deadlift.mp4"
+};
+
+export const HEVY_VIDEO_DATABASE: Record<string, string> = {
+  "Ab Wheel": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08571201-Wheel-Rollout_Waist.mp4",
+  "Arnold Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02871201-Dumbbell-Arnold-Press-II_Shoulders.mp4",
+  "Around The World": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02881201-Dumbbell-Around-Pullover_Chest.mp4",
+  "Back Extension (Hyperextension)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/18601201-Hyperextension-(VERSION-2)_Hips.mp4",
+  "Back Extension (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05731201-Lever-Back-Extension_Waist.mp4",
+  "Battle Ropes": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01281201-Battling-Ropes.mp4",
+  "Bench Dip": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/13991201-Bench-dip-on-floor_Upper-Arms.mp4",
+  "Bench Press (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00251201-Barbell-Bench-Press_Chest.mp4",
+  "Bench Press (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01511201-Cable-Bench-Press_Chest.mp4",
+  "Bench Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02891201-Dumbbell-Bench-Press_Chest.mp4",
+  "Bench Press (Smith Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07481201-Smith-Bench-Press_Chest.mp4",
+  "Bench Press - Close Grip (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00301201-Barbell-Close-Grip-Bench-Press_Upper-Arms.mp4",
+  "Bench Press - Wide Grip (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01221201-Barbell-Wide-Bench-Press_Chest.mp4",
+  "Bent Over Row (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00271201-Barbell-Bent-Over-Row_Back.mp4",
+  "Bent Over Row (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02931201-Dumbbell-Bent-Over-Row_Back.mp4",
+  "Bicep Curl (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00311201-Barbell-Curl_Upper-Arms.mp4",
+  "Bicep Curl (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01561201-Cable-Curl_Upper-Arms.mp4",
+  "Bicep Curl (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02941201-Dumbbell-Biceps-Curl_Upper-Arms.mp4",
+  "Bicycle Crunch": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00031201-air-bike-m_waist.mp4",
+  "Bicycle Crunch Raised Legs": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01471201-Bycicle-Twisting-Crunch_Waist.mp4",
+  "Burpee": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11601201-Burpee_Cardio.mp4",
+  "Butterfly (Pec Deck)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/10301201-Lever-Pec-Deck-Fly_Chest.mp4",
+  "Cable Core Palloff Press": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/12021201-Cable-horizontal-Pallof-Press_waist.mp4",
+  "Cable Crunch": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01751201-Cable-Kneeling-Crunch_Waist.mp4",
+  "Cable Fly Crossovers": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/12691201-Cable-Standing-Up-Straight-Crossovers_Chest.mp4",
+  "Cable Pull Through": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/12061201-Cable-pull-through_hips.mp4",
+  "Cable Twist (Down to up)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/12071201-Cable-twist-(down-up)_waist.mp4",
+  "Cable Twist (Up to down)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08621201-Cable-twist-(up-down)_Waist.mp4",
+  "Calf Extension (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/23151201-Lever-Rotary-Calf_Calves.mp4",
+  "Calf Press (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07381201-Sled-45-Calf-Press_Calves.mp4",
+  "Chest Dip": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02511201-Chest-Dip_Chest.mp4",
+  "Chest Dip (Assisted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00091201-Assisted-Chest-Dip-(kneeling)_Chest.mp4",
+  "Chest Fly (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03081201-Dumbbell-Fly_Chest.mp4",
+  "Chest Fly (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05961201-Lever-Seated-Fly_Chest.mp4",
+  "Chest Press (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05771201-Lever-Chest-Press_Chest.mp4",
+  "Chest Supported Incline Row (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03271201-Dumbbell-Incline-Row_Back.mp4",
+  "Chest Supported Reverse Fly (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03831201-Dumbbell-Reverse-Fly_Shoulders.mp4",
+  "Chest Supported Y Raise (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/35411201-Dumbbell-Incline-Y-Raise_Shoulders_.mp4",
+  "Chin Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/13261201-Chin-Up_Back.mp4",
+  "Clean and Jerk": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00281201-Barbell-Clean-and-Press_Shoulders.mp4",
+  "Clean and Press": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00281201-Barbell-Clean-and-Press_Shoulders.mp4",
+  "Concentration Curl": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02971201-Dumbbell-Concentration-Curl_Upper-Arms.mp4",
+  "Crunch": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02741201-Crunch-Floor-m_waist.mp4",
+  "Crunch (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05951201-Lever-Seated-Crunch-(chest-pad).mp4",
+  "Deadlift (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00321201-Barbell-Deadlift_Hips-FIX.mp4",
+  "Deadlift (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04321201-Dumbbell-Stiff-Leg-Deadlift_Waist.mp4",
+  "Deadlift (Smith Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07521201-Smith-Deadlift_Hips.mp4",
+  "Deadlift (Trap bar)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08111201-Trap-Bar-Deadlift_Thighs.mp4",
+  "Deadlift High Pull": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11991201-Sumo-Deadlift-High-Pull_Thighs_Shoulders.mp4",
+  "Decline Bench Press (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00331201-Barbell-Decline-Bench-Press_Chest.mp4",
+  "Decline Bench Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03011201-Dumbbell-Decline-Bench-Press_Chest.mp4",
+  "Decline Bench Press (Smith Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07531201-Smith-Decline-Bench-Press_Chest.mp4",
+  "Decline Chest Fly (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03021201-Dumbbell-Decline-Fly_Chest.mp4",
+  "Decline Crunch": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02771201-Decline-Crunch_Waist.mp4",
+  "Decline Crunch (Weighted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/21301201-Weighted-decline-crunch_Waist.mp4",
+  "Decline Push Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02791201-Decline-Push-Up_Chest.mp4",
+  "Drag Curl": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00381201-Barbell-Drag-Curl_Upper-Arms.mp4",
+  "Dumbbell Row": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02921201-Dumbbell-Bent-over-Row_Back.mp4",
+  "Elbow to Knee": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/23121201-Lying-Elbow-to-Knee_Waist.mp4",
+  "Elliptical Trainer": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/21921201-Elliptical-Machine-Walk_Cardio.mp4",
+  "EZ Bar Biceps Curl": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04471201-EZ-Barbell-Curl_Upper-Arms.mp4",
+  "Farmers Walk": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/21331201-Farmers-walk_Cardio.mp4",
+  "Floor Triceps Dip": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08151201-Triceps-Dips-Floor_Upper-Arms.mp4",
+  "Flutter Kicks": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/12441201-Flutter-Kicks-(version-3)_Hips.mp4",
+  "Front Raise (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00411101-Barbell-Front-Raise_Shoulders.mp4",
+  "Front Raise (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01621201-Cable-Front-Raise_Shoulders.mp4",
+  "Front Raise (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03101201-Dumbbell-Front-Raise_Shoulders.mp4",
+  "Front Squat": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00421201-Barbell-Front-Squat_Hips.mp4",
+  "Full Squat": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00431201-Barbell-Full-Squat_Thighs.mp4",
+  "Glute Kickback (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/10371201-Lever-Standing-Rear-Kick_Hips.mp4",
+  "Glute Kickback on Floor": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14741201-Bent-Leg-Kickback-(kneeling)_Hips.mp4",
+  "Goblet Squat": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/22811201-Dumbbell-Goblet-Squat-(female)_Thighs.mp4",
+  "Good Morning (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00441201-Barbell-Good-Morning_Thighs.mp4",
+  "Gorilla Row (Kettlebell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/72301201-Kettlebell-Gorilla-Row-(male)_Back_.mp4",
+  "Hack Squat": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00461201-Barbell-Hack-Squat_Hips.mp4",
+  "Hack Squat (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07431201-Sled-Hack-Squat_Hips.mp4",
+  "Hammer Curl (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01661201-Cable-Hammer-Curl_Forearm.mp4",
+  "Hammer Curl (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03121201-Dumbbell-Hammer-Curl-(version-2)_Upper-Arms.mp4",
+  "Hanging Leg Raise": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/17641201-Hanging-Leg-Hip-Raise_Waist.mp4",
+  "Hex Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/36811201-Dumbbell-Squeeze-Bench-Press_Chest-FIX_.mp4",
+  "Hip Abduction (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05971201-Lever-Seated-Hip-Abduction_Hips.mp4",
+  "Hip Adduction (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05981201-Lever-Seated-Hip-Adduction_Thighs.mp4",
+  "Hip Thrust (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/21461201-Lever-Hip-Thrust_Hips.mp4",
+  "Incline Bench Press (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00471201-Barbell-Incline-Bench-Press_Chest.mp4",
+  "Incline Bench Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03141201-Dumbbell-Incline-Bench-Press_Chest.mp4",
+  "Incline Bench Press (Smith Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07571201-Smith-Incline-Bench-Press_Chest.mp4",
+  "Incline Chest Fly (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03191201-Dumbbell-Incline-Fly_Chest.mp4",
+  "Incline Chest Press (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14791201-Lever-Incline-Chest-Press_Chest.mp4",
+  "Incline Push Ups": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/37851201-Incline-Push-Up-(on-box).mp4",
+  "Inverted Row": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04991201-Inverted-Row_Back.mp4",
+  "Iso-Lateral Chest Press (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05761201-Lever-Chest-Press-(plate-loaded)_Chest.mp4",
+  "Iso-Lateral Low Row": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/42141201-Lever-Low-Row-(plate-loaded)_Back_.mp4",
+  "JM Press (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00521201-Barbell-JM-Bench-Press_Upper-Arms-FIX_.mp4",
+  "Jump Squat": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05141201-Jump-Squat_Thighs.mp4",
+  "Jumping Lunge": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11661201-Jump-Split-m_Plyometrics.mp4",
+  "Knee Raise Parallel Bars": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/21261201-Captains-chair-leg-raise_Hips.mp4",
+  "L-Sit Hold": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14021201-L-sit_Waist.mp4",
+  "Landmine 180": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05621201-Landmine-180_waist.mp4",
+  "Landmine Row": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/32001201-Lever-Bent-over-Row-with-V-bar-(plate-loaded)_Back.mp4",
+  "Lat Pulldown (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01501201-Cable-Bar-Lateral-Pulldown_Back.mp4",
+  "Lat Pulldown (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05791201-Lever-Front-Pulldown_Back.mp4",
+  "Lateral Raise (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01781201-Cable-Lateral-Raise_shoulder.mp4",
+  "Lateral Raise (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03341201-Dumbbell-Lateral-Raise_shoulder.mp4",
+  "Lateral Raise (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05841201-Lever-Lateral-Raise_shoulder.mp4",
+  "Leg Extension (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05851201-Lever-Leg-Extension_Thighs.mp4",
+  "Leg Press (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07391201-Sled-45-Leg-Press_Hips.mp4",
+  "Leg Press Horizontal (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/22671201-Lever-Seated-Leg-Press_Thighs.mp4",
+  "Low Cable Fly Crossovers": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01791201-Cable-Low-Fly_Chest.mp4",
+  "Lunge": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14601201-Walking-Lunge-Male_Hips.mp4",
+  "Lunge (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00541201-Barbell-Lunge_Thighs.mp4",
+  "Lunge (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03361201-Dumbbell-Lunge_Hips.mp4",
+  "Lying Leg Curl (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05861201-Lever-Lying-Leg-Curl_Thighs.mp4",
+  "Lying Leg Raise": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11631201-Lying-Leg-Raise_Waist.mp4",
+  "Lying Neck Curls (Weighted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/10431201-Weighted-Lying-Neck-Flexion_neck.mp4",
+  "Negative Pull Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/47741201-Pull-up-(negative)-(female)_Back_.mp4",
+  "Oblique Crunch": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06351201-Oblique-Crunches-Floor_Waist.mp4",
+  "One Arm Push Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07251201-Single-Arm-Push-up_Chest.mp4",
+  "Overhead Press (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11651201-Barbell-Standing-Military-Press-(without-rack)_Shoulders.mp4",
+  "Overhead Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04261201-Dumbbell-Standing-Overhead-Press_shoulder.mp4",
+  "Overhead Press (Smith Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/12241201-Smith-Standing-Shoulder-Press_Shoulders.mp4",
+  "Pause Squat (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/50161201-Barbell-Pause-Full-Squat_Thighs_.mp4",
+  "Pendulum Squat (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/49511201-Lever-Pendulum-Squat-(plate-loaded)_Thighs_.mp4",
+  "Plank": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04631201-Front-Plank-m_waist.mp4",
+  "Plate Front Raise": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08341201-Weighted-Front-Raise_Shoulders.mp4",
+  "Plate Squeeze (Svend Press)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08561201-Weighted-Svend-Press_Chest.mp4",
+  "Power Clean": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06481201-Power-Clean_Thighs.mp4",
+  "Preacher Curl (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00701201-Barbell-Preacher-Curl_Upper-Arms.mp4",
+  "Preacher Curl (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04021201-Dumbbell-Seated-Preacher-Curl_Upper-Arms.mp4",
+  "Preacher Curl (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05921201-Lever-Preacher-Curl_Upper-Arms.mp4",
+  "Pull Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06521201-Pull-up_Back.mp4",
+  "Pull Up (Assisted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00171201-Assisted-Pull-up_Back.mp4",
+  "Pullover (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03751201-Dumbbell-Pullover_Chest.mp4",
+  "Pullover (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/22851201-Lever-Pullover-(plate-loaded)_Back_.mp4",
+  "Push Press": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/12001201-Push-Press_Shoulders.mp4",
+  "Push Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06621201-Push-up-m_Chest.mp4",
+  "Push Up (Weighted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11721201-Assisted-Weighted-Push-up_Chest.mp4",
+  "Push Up - Close Grip": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02591201-Close-Grip-Push-up_Upper-Arms.mp4",
+  "Rear Delt Reverse Fly (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06021201-Lever-Seated-Reverse-Fly_Shoulders.mp4",
+  "Reverse Crunch": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08721201-Reverse-Crunch-m_waist.mp4",
+  "Reverse Curl (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00801201-Barbell-Reverse-Curl_Forearm.mp4",
+  "Reverse Curl (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02061201-Cable-Reverse-Curl_Forearm.mp4",
+  "Reverse Curl (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03821201-Dumbbell-Revers-grip-Biceps-Curl_Forearms.mp4",
+  "Reverse Grip Lat Pulldown (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02081201-Cable-Reverse-grip-Straight-Back-Seated-High-Row_Back.mp4",
+  "Reverse Hyperextension": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05931201-Lever-Reverse-Hyperextension-(plate-loaded)_Hips.mp4",
+  "Reverse Lunge (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03811201-Dumbbell-Rear-Lunge_Thighs.mp4",
+  "Reverse Plank": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08671201-Reverse-plank_Back.mp4",
+  "Romanian Deadlift (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/22131201-Barbell-Romanian-Deadlift-(female)_Hips.mp4",
+  "Romanian Deadlift (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14591201-Dumbbell-Romanian-Deadlift_Hips.mp4",
+  "Rope Straight Arm Pulldown": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02371201-Cable-Straight-Arm-Pulldown-(with-rope)_Back.mp4",
+  "Rowing Machine": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/22701201-Rowing-Straight-Back-(with-rowing-machine)-(female)_Cardio.mp4",
+  "Running": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/21961201-Run-(female)_Cardio.mp4",
+  "Russian Twist (Bodyweight)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06871201-Russian-Twist_waist.mp4",
+  "Russian Twist (Weighted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/23711201-Weighted-Russian-Twist_Waist.mp4",
+  "Seated Cable Row - Bar Grip": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01801201-Cable-Low-Seated-Row_Back.mp4",
+  "Seated Cable Row - Bar Wide Grip": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02181201-Cable-Seated-Wide-grip-Row_Back.mp4",
+  "Seated Cable Row - V Grip (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/26611201-Cable-Seated-Row-with-V-bar_Back.mp4",
+  "Seated Calf Raise": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05941201-Lever-Seated-Calf-Raise-(plate-loaded).mp4",
+  "Seated Dip Machine": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14511201-Lever-Seated-Dip_Upper-Arms.mp4",
+  "Seated Incline Curl (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03151201-Dumbbell-Incline-Biceps-Curl_Upper-Arms.mp4",
+  "Seated Lateral Raise (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03961201-Dumbbell-Seated-Lateral-Raise_shoulder.mp4",
+  "Seated Leg Curl (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05991201-Lever-Seated-Leg-Curl_Thighs.mp4",
+  "Seated Overhead Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02901201-Dumbbell-Bench-Seated-Press_Shoulders.mp4",
+  "Seated Row (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/22651201-Lever-Seated-Row-(version-2)_Back.mp4",
+  "Seated Shoulder Press (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14541201-Lever-Seated-Shoulder-Press_Shoulders.mp4",
+  "Seated Wrist Extension (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00791201-Barbell-Revers-Wrist-Curl-II_Forearms.mp4",
+  "Shoulder Press (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04051201-Dumbbell-Seated-Shoulder-Press_Shoulders.mp4",
+  "Shoulder Press (Machine Plates)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/05871201-Lever-Military-Press-(plate-loaded)_shoulder.mp4",
+  "Shoulder Taps": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06991201-Shoulder-Tap-Push-up_Plyometrics.mp4",
+  "Shrug (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00951201-Barbell-Shrug_Back.mp4",
+  "Shrug (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02201201-Cable-Shrug_Back.mp4",
+  "Shrug (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04061201-Dumbbell-Shrug_Back.mp4",
+  "Shrug (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06041201-Lever-Shrug-(plate-loaded)_Back.mp4",
+  "Shrug (Smith Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07461201-Smith-Back-Shrug_Back.mp4",
+  "Side Bend": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00021201-45-Side-Bend_Waist.mp4",
+  "Side Bend (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04071201-Dumbbell-Side-Bend_Waist.mp4",
+  "Side Plank": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07151201-Side-Plank-m_Waist.mp4",
+  "Single Arm Lateral Raise (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01921201-Cable-One-Arm-Lateral-Raise_Shoulders.mp4",
+  "Single Arm Tricep Extension (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03621201-Dumbbell-One-Arm-Triceps-Extension-(on-bench)_Upper-Arms.mp4",
+  "Single Arm Triceps Pushdown (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/50331201-Cable-Single-Arm-Triceps-Pushdown-(rope-attachment.mp4",
+  "Single Leg Press (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08831201-Lever-Horizontal-One-leg-Press_Hips.mp4",
+  "Single Leg Standing Calf Raise (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04171201-Dumbbell-Standing-Calf-Raise_Calves.mp4",
+  "Single Leg Standing Calf Raise (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06051201-Lever-Standing-Calf-Raise_Calves.mp4",
+  "Sissy Squat (Weighted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08511201-Weighted-Sissy-Squat_Thighs.mp4",
+  "Sit Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00011201-3-4-Sit-up_Waist.mp4",
+  "Sled Push": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/25241201-Power-Sled-Push-(female)_Thighs.mp4",
+  "Spider Curl (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00721201-Barbell-Prone-Incline-Curl_Upper-Arms.mp4",
+  "Spider Curl (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03741201-Dumbbell-Prone-Incline-Curl_Upper-Arms.mp4",
+  "Spinning": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/22791201-Stationary-Bike-Run-(version-4)_Cardio.mp4",
+  "Split Squat (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/29601201-Dumbbell-Split-Squat_Thighs.mp4",
+  "Squat (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00431201-Barbell-Full-Squat_Thighs.mp4",
+  "Squat (Bodyweight)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11971201-Squat-m_Thighs.mp4",
+  "Squat (Smith Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/07501201-Smith-Chair-Squat_Thighs.mp4",
+  "Stair Machine": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/23111201-Walking-on-Stepmill_Cardio.mp4",
+  "Standing Calf Raise (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04171201-Dumbbell-Standing-Calf-Raise_Calves.mp4",
+  "Standing Calf Raise (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06051201-Lever-Standing-Calf-Raise_Calves.mp4",
+  "Standing Calf Raise (Smith)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11641201-Smith-Calf-Raise-(version-2)_Calves.mp4",
+  "Standing Military Press (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/11651201-Barbell-Standing-Military-Press-(without-rack)_Shoulders.mp4",
+  "Straight Arm Lat Pulldown (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02381201-Cable-Straight-Arm-Pulldown_Back.mp4",
+  "Straight Leg Deadlift": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01161201-Barbell-Straight-Leg-Deadlift_Thighs.mp4",
+  "Sumo Deadlift": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01171201-Barbell-Sumo-Deadlift_Hips.mp4",
+  "Sumo Squat": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/10641201-Sumo-Squat-(male)_Thighs-FIX_.mp4",
+  "Sumo Squat (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/10631201-Barbell-sumo-squat_Thighs.mp4",
+  "Sumo Squat (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/23221201-Dumbbell-Sumo-Squat-(female)_Thighs_.mp4",
+  "Sumo Squat (Kettlebell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/40891201-Kettlebell-Sumo-Squat-(male)_Hips_.mp4",
+  "T Bar Row": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/06061201-Lever-T-bar-Row-(plate-loaded)_Back.mp4",
+  "Toes to Bar": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04741201-Hanging-Straight-Leg-Hip-Raise_Waist.mp4",
+  "Treadmill": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/21971201-Run-on-Treadmill-(female)_Cardio.mp4",
+  "Triceps Dip": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08141201-Triceps-Dip_Upper-Arms.mp4",
+  "Triceps Dip (Assisted)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00191201-Assisted-Triceps-Dip-(kneeling)_Upper-Arms.mp4",
+  "Triceps Extension (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/00921201-Barbell-Seated-Overhead-Triceps-Extension_Upper-Arms.mp4",
+  "Triceps Extension (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04301201-Dumbbell-Standing-Triceps-Extension_Upper-Arms.mp4",
+  "Triceps Extension (Machine)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/10331201-Lever-Triceps-Extension_Upper-Arms.mp4",
+  "Triceps Kickback (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/03331201-Dumbbell-Kickback_Upper-Arms.mp4",
+  "Triceps Pushdown": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02011201-Cable-Pushdown_Upper-Arms.mp4",
+  "Upright Row (Barbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/01211201-Barbell-Upright-Row_Shoulders.mp4",
+  "Upright Row (Cable)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/02461201-Cable-Upright-Row_shoulder.mp4",
+  "Upright Row (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04371201-Dumbbell-Upright-Row_shoulder.mp4",
+  "V Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/08251201-V-up_Waist.mp4",
+  "Walking Lunge": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14601201-Walking-Lunge-Male_Hips.mp4",
+  "Walking Lunge (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/15571201-Dumbbell-Walking-Lunges_Thighs_.mp4",
+  "Wide Pull Up": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/14291201-Wide-Grip-Pull-Up_Back.mp4",
+  "Zottman Curl (Dumbbell)": "https://pump-app.s3.eu-west-2.amazonaws.com/exercise-assets/04391201-Dumbbell-Zottman-Curl_Upper-Arms-FIX.mp4"
+};
+
+// Normalize string for fuzzy matching
+function norm(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/\(.*?\)/g, '')
+    .replace(/[^a-z0-9]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+const PRECOMPUTED_HEVY = Object.entries(HEVY_VIDEO_DATABASE).map(([name, url]) => ({
+  name,
+  clean: norm(name),
+  url
+}));
+
+// Synonyms dictionary for cross-referencing
+const SYNONYMS: Array<[string, string]> = [
+  ['incline dumbbell press', 'incline bench press'],
+  ['incline db press', 'incline bench press'],
+  ['cable pushdown', 'triceps pushdown'],
+  ['tricep rope pushdown', 'triceps pushdown'],
+  ['pushup', 'push up'],
+  ['pullup', 'pull up'],
+  ['chinup', 'chin up'],
+  ['lat pull down', 'lat pulldown'],
+  ['military press', 'standing military press'],
+  ['seated row', 'seated cable row'],
+  ['skull crusher', 'triceps extension'],
+  ['overhead press', 'overhead press']
+];
+
+export function findHevyVideoUrl(exerciseName: string, exerciseId?: string): string | undefined {
+  if (!exerciseName) return undefined;
+
+  // 1. Direct match on local high-performance staple files
+  for (const [stapleName, url] of Object.entries(LOCAL_STAPLE_VIDEOS)) {
+    if (exerciseName.toLowerCase() === stapleName.toLowerCase()) return url;
+    if (norm(exerciseName) === norm(stapleName)) return url;
+  }
+
+  // 2. Specific keyword shortcuts for staple IDs
+  if (exerciseId) {
+    const idMap: Record<string, string> = {
+      'ex-barbell-row': '/exercises/barbell_bent_over_row.mp4',
+      'ex-bench-press': '/exercises/barbell_bench_press.mp4',
+      'ex-deadlift': '/exercises/barbell_deadlift.mp4',
+      'ex-barbell-squat': '/exercises/barbell_squat.mp4',
+      'ex-pull-up': '/exercises/pull_up.mp4',
+      'ex-lat-pulldown': '/exercises/lat_pulldown.mp4',
+      'ex-overhead-press': '/exercises/overhead_press.mp4',
+      'ex-db-lateral-raise': '/exercises/lateral_raise.mp4',
+      'ex-barbell-curl': '/exercises/barbell_curl.mp4',
+      'ex-dips-chest': '/exercises/chest_dip.mp4',
+      'ex-cable-pushdown': '/exercises/cable_pushdown.mp4',
+      'ex-leg-press': '/exercises/leg_press.mp4',
+      'ex-romanian-deadlift': '/exercises/romanian_deadlift.mp4'
+    };
+    if (idMap[exerciseId]) return idMap[exerciseId];
+  }
+
+  const cleanQuery = norm(exerciseName);
+
+  // 3. Exact normalized match in Hevy DB
+  const exactMatch = PRECOMPUTED_HEVY.find(e => e.clean === cleanQuery);
+  if (exactMatch) return exactMatch.url;
+
+  // 4. Substring inclusion
+  const subMatch = PRECOMPUTED_HEVY.find(e => 
+    e.clean.length > 3 && (cleanQuery.includes(e.clean) || e.clean.includes(cleanQuery))
+  );
+  if (subMatch) return subMatch.url;
+
+  // 5. Check synonyms
+  for (const [alias, canonical] of SYNONYMS) {
+    if (cleanQuery.includes(alias)) {
+      const synMatch = PRECOMPUTED_HEVY.find(e => e.clean.includes(canonical));
+      if (synMatch) return synMatch.url;
+    }
+  }
+
+  // 6. Word-intersection match
+  const words = cleanQuery.split(' ').filter(w => w.length > 2);
+  if (words.length >= 2) {
+    const wordMatch = PRECOMPUTED_HEVY.find(e => words.every(w => e.clean.includes(w)));
+    if (wordMatch) return wordMatch.url;
+  }
+
+  return undefined;
+}

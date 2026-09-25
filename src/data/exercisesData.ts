@@ -1,6 +1,7 @@
 import { Exercise } from '../types/workout';
 import { ANIMATED_EXERCISES_DATABASE } from './animatedExercisesDatabase';
 import { EXERCISES_DATABASE } from './exercisesDatabase';
+import { findHevyVideoUrl } from './hevyVideoMap';
 
 export const CURATED_EXERCISES: Exercise[] = [
   // CHEST
@@ -624,6 +625,16 @@ for (const ex of EXERCISES_DATABASE) {
   if (!seenIds.has(ex.id)) {
     seenIds.add(ex.id);
     mergedList.push(ex);
+  }
+}
+
+// 4. Enrich exercises with Hevy 60 FPS MP4 videos (0% blur, smooth tempo)
+for (const ex of mergedList) {
+  if (!ex.videoUrl) {
+    const video = findHevyVideoUrl(ex.name, ex.id);
+    if (video) {
+      ex.videoUrl = video;
+    }
   }
 }
 
