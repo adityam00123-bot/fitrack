@@ -10,6 +10,7 @@ import { WorkoutToolsModal } from './components/tools/WorkoutToolsModal';
 import { SupabaseSettingsModal } from './components/tools/SupabaseSettingsModal';
 
 import { WorkoutDashboard } from './components/workouts/WorkoutDashboard';
+import { HomeDashboard } from './components/home/HomeDashboard';
 import { ExerciseList } from './components/exercises/ExerciseList';
 import { NutritionDashboard } from './components/nutrition/NutritionDashboard';
 import { IndianDietPlanner } from './components/indianDiet/IndianDietPlanner';
@@ -26,7 +27,7 @@ const MainLayout: React.FC = () => {
   } = useApp();
 
   return (
-    <div className="min-h-screen bg-[#0b0d13] text-gray-100 flex flex-col font-sans selection:bg-orange-500/30 selection:text-orange-200">
+    <div className="min-h-screen bg-[#0a0d14] text-slate-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
       {/* Top Navigation Bar */}
       <Navbar />
 
@@ -37,6 +38,7 @@ const MainLayout: React.FC = () => {
 
         {/* Dynamic Tab Body */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-24 md:pb-12 overflow-y-auto">
+          {activeTab === 'home' && <HomeDashboard />}
           {activeTab === 'workouts' && <WorkoutDashboard />}
           {activeTab === 'exercises' && <ExerciseList />}
           {activeTab === 'nutrition' && <NutritionDashboard />}

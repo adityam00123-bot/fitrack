@@ -210,15 +210,15 @@ export const ActiveWorkoutLogger: React.FC = () => {
   return (
     <div className="space-y-6 max-w-4xl mx-auto pb-24">
       {/* Active Session Header Card */}
-      <div className="p-4 sm:p-6 rounded-3xl bg-gradient-to-r from-gray-900 via-gray-900 to-orange-950/40 border border-orange-500/30 shadow-2xl relative overflow-hidden">
+      <div className="p-4 sm:p-6 rounded-3xl bg-gradient-to-r from-[#141A28] to-[#0F1420] border border-slate-800 shadow-2xl relative overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="flex h-2.5 w-2.5 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500" />
               </span>
-              <span className="text-xs uppercase font-extrabold tracking-wider text-rose-400">
+              <span className="text-xs uppercase font-extrabold tracking-wider text-blue-400">
                 Live Gym Session
               </span>
             </div>
@@ -229,21 +229,21 @@ export const ActiveWorkoutLogger: React.FC = () => {
 
           {/* Live Timer, Stats & Quick Actions */}
           <div className="flex items-center gap-2.5 flex-wrap">
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-gray-800/90 border border-gray-700 text-white font-mono text-base font-bold shadow-sm">
-              <Clock className="w-4 h-4 text-orange-400" />
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#161B28] border border-slate-700 text-white font-mono text-base font-bold shadow-sm">
+              <Clock className="w-4 h-4 text-blue-400" />
               <span>{formatTimer(elapsedSeconds)}</span>
             </div>
 
             <button
               onClick={() => startRestTimer(90)}
-              className="px-3.5 py-2 rounded-2xl bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/40 text-orange-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3.5 py-2 rounded-2xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Play className="w-3.5 h-3.5" /> 90s Rest
             </button>
 
             <button
               onClick={() => setPlateCalcWeight(60)}
-              className="px-3.5 py-2 rounded-2xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3.5 py-2 rounded-2xl bg-indigo-600/15 hover:bg-indigo-600/25 border border-indigo-500/30 text-indigo-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
               title="Barbell Plate Calculator"
             >
               <Scale className="w-3.5 h-3.5" /> Plate Calc
@@ -252,22 +252,22 @@ export const ActiveWorkoutLogger: React.FC = () => {
         </div>
 
         {/* Live Volume & Sets Pill Bar */}
-        <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-gray-800/80 text-center">
-          <div className="p-2 rounded-xl bg-gray-950/60 border border-gray-800">
-            <span className="text-[10px] text-gray-400 font-semibold uppercase block">Volume Lifted</span>
-            <strong className="text-sm sm:text-base font-black text-orange-400 font-mono">
+        <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-800 text-center">
+          <div className="p-2.5 rounded-xl bg-[#121622] border border-slate-800">
+            <span className="text-[10px] text-slate-400 font-semibold uppercase block">Volume Lifted</span>
+            <strong className="text-sm sm:text-base font-black text-blue-400 font-mono">
               {sessionStats.volume.toLocaleString()} kg
             </strong>
           </div>
-          <div className="p-2 rounded-xl bg-gray-950/60 border border-gray-800">
-            <span className="text-[10px] text-gray-400 font-semibold uppercase block">Sets Done</span>
+          <div className="p-2.5 rounded-xl bg-[#121622] border border-slate-800">
+            <span className="text-[10px] text-slate-400 font-semibold uppercase block">Sets Done</span>
             <strong className="text-sm sm:text-base font-black text-emerald-400 font-mono">
               {sessionStats.completedSets} sets
             </strong>
           </div>
-          <div className="p-2 rounded-xl bg-gray-950/60 border border-gray-800">
-            <span className="text-[10px] text-gray-400 font-semibold uppercase block">Total Reps</span>
-            <strong className="text-sm sm:text-base font-black text-cyan-400 font-mono">
+          <div className="p-2.5 rounded-xl bg-[#121622] border border-slate-800">
+            <span className="text-[10px] text-slate-400 font-semibold uppercase block">Total Reps</span>
+            <strong className="text-sm sm:text-base font-black text-indigo-400 font-mono">
               {sessionStats.totalReps} reps
             </strong>
           </div>
@@ -583,15 +583,15 @@ export const ActiveWorkoutLogger: React.FC = () => {
                   </table>
 
                   {/* Add Set Button */}
-                  <div className="mt-3 pt-2.5 border-t border-gray-800 flex justify-between items-center text-xs">
-                    <span className="text-[11px] text-gray-500">
+                  <div className="mt-3 pt-2.5 border-t border-slate-800 flex justify-between items-center text-xs">
+                    <span className="text-[11px] text-slate-500">
                       Tap set number to switch Warmup (W) / Drop Set (D)
                     </span>
                     <button
                       onClick={() => addSetToExercise(ex.exerciseId)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-750 text-gray-300 hover:text-white font-bold transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#161B28] hover:bg-[#1E2538] text-slate-300 hover:text-white font-bold transition-colors cursor-pointer border border-slate-800"
                     >
-                      <Plus className="w-3.5 h-3.5 text-orange-400" />
+                      <Plus className="w-3.5 h-3.5 text-blue-400" />
                       <span>Add Set</span>
                     </button>
                   </div>
@@ -603,12 +603,12 @@ export const ActiveWorkoutLogger: React.FC = () => {
       </div>
 
       {/* Action Footer Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-800">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
         <button
           onClick={() => setIsExercisePickerOpen(true)}
-          className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-gray-850 hover:bg-gray-800 border border-gray-750 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
+          className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-[#121622] hover:bg-[#161B28] border border-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
         >
-          <Plus className="w-4 h-4 text-orange-400" />
+          <Plus className="w-4 h-4 text-blue-400" />
           <span>Add Another Exercise</span>
         </button>
 
@@ -619,14 +619,14 @@ export const ActiveWorkoutLogger: React.FC = () => {
                 cancelWorkout();
               }
             }}
-            className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-gray-800/80 hover:bg-rose-950/40 text-gray-400 hover:text-rose-300 border border-gray-700/80 text-xs font-bold transition-colors cursor-pointer"
+            className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#161B28] hover:bg-rose-950/40 text-slate-400 hover:text-rose-300 border border-slate-800 text-xs font-bold transition-colors cursor-pointer"
           >
             Discard Workout
           </button>
 
           <button
             onClick={handleInitiateFinish}
-            className="flex-1 sm:flex-initial px-7 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-sm shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial px-7 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-black text-sm shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
           >
             <Check className="w-5 h-5 stroke-[2.5]" />
             <span>Finish Workout</span>

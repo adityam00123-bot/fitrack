@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import {
   Dumbbell,
@@ -7,9 +7,12 @@ import {
   Cloud,
   CheckCircle2,
   Clock,
-  Sparkles,
-  Calculator
+  Globe,
+  ChevronDown,
+  Calculator,
+  Scale
 } from 'lucide-react';
+import { SUPPORTED_LANGUAGES, SupportedLanguage } from '../../i18n/translations';
 
 export const Navbar: React.FC = () => {
   const {
@@ -21,102 +24,176 @@ export const Navbar: React.FC = () => {
     supabaseConfig,
     mealLogs,
     selectedDate,
-    macroTargets
+    macroTargets,
+    language,
+    setLanguage,
+    weightUnit,
+    setWeightUnit,
+    t
   } = useApp();
 
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  // Close language dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+        setIsLangOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   // Calculate calories consumed today
-  const todayMeals = mealLogs.filter(m => m.date === selectedDate);
+  const todayMeals = mealLogs.filter((m) => m.date === selectedDate);
   const totalCals = todayMeals.reduce((acc, m) => acc + m.totalCalories, 0);
   const remainingCals = macroTargets.calories - totalCals;
 
+  const currentLang = SUPPORTED_LANGUAGES.find((l) => l.code === language) || SUPPORTED_LANGUAGES[0];
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#0d0f17]/95 backdrop-blur border-b border-gray-800/80 px-4 lg:px-8 py-3 transition-all">
+    <header className="sticky top-0 z-40 w-full bg-[#0a0d14]/95 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-2.5 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        {/* Logo and Brand */}
+        {/* Brand & Logo */}
         <div className="flex items-center gap-3">
           <div
-            onClick={() => setActiveTab('workouts')}
+            onClick={() => setActiveTab('home')}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-600 flex items-center justify-center shadow-lg shadow-rose-500/20 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
               <Dumbbell className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-xl tracking-tight text-white">
-                  FI<span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-500">TRACK</span>
+                <span className="font-black text-xl tracking-tight text-white">
+                  FIT<span className="text-blue-500">RACK</span>
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/20">
-                  Desi + Wger
+                <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  PRO
                 </span>
               </div>
-              <p className="text-[11px] text-gray-400 hidden sm:block">Pro Workout & Indian Diet System</p>
+              <p className="text-[10px] text-slate-400 hidden sm:block font-medium">
+                Professional Fitness & Nutrition System
+              </p>
             </div>
           </div>
         </div>
 
         {/* Quick Calorie & Macro pill (desktop) */}
-        <div className="hidden md:flex items-center gap-4 bg-gray-900/80 border border-gray-800 px-3.5 py-1.5 rounded-full text-xs">
-          <div className="flex items-center gap-1.5 text-gray-300">
-            <Flame className="w-3.5 h-3.5 text-orange-400" />
-            <span>Today:</span>
-            <strong className="text-white">{totalCals}</strong>
-            <span className="text-gray-400">/ {macroTargets.calories} kcal</span>
+        <div className="hidden md:flex items-center gap-4 bg-[#121622] border border-slate-800/80 px-3.5 py-1.5 rounded-full text-xs">
+          <div className="flex items-center gap-1.5 text-slate-300">
+            <Flame className="w-3.5 h-3.5 text-amber-400" />
+            <span className="text-slate-400">Calories:</span>
+            <strong className="text-white font-mono">{totalCals}</strong>
+            <span className="text-slate-500">/ {macroTargets.calories} kcal</span>
           </div>
-          <span className="w-1 h-3 bg-gray-700 rounded-full" />
-          <div className="text-gray-400">
-            <span className={remainingCals >= 0 ? 'text-emerald-400' : 'text-rose-400'}>
-              {remainingCals >= 0 ? `${remainingCals} kcal left` : `${Math.abs(remainingCals)} kcal over`}
+          <span className="w-1 h-3 bg-slate-700 rounded-full" />
+          <div className="text-xs">
+            <span className={remainingCals >= 0 ? 'text-emerald-400 font-medium' : 'text-rose-400 font-medium'}>
+              {remainingCals >= 0 ? `${remainingCals} kcal remaining` : `${Math.abs(remainingCals)} kcal over`}
             </span>
           </div>
         </div>
 
-        {/* Right Action buttons */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Active Workout live pill */}
+        {/* Right Action Controls */}
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Active Workout Live Pill */}
           {activeWorkout && (
             <button
               onClick={() => setActiveTab('workouts')}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-semibold animate-pulse hover:bg-rose-500/25 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 text-xs font-semibold animate-pulse hover:bg-blue-600/30 transition-colors"
             >
-              <Clock className="w-3.5 h-3.5 text-rose-400 animate-spin" />
-              <span className="hidden sm:inline">Active Workout:</span>
-              <span className="max-w-[100px] truncate">{activeWorkout.routineName}</span>
+              <Clock className="w-3.5 h-3.5 text-blue-400 animate-spin" />
+              <span className="hidden sm:inline">Active:</span>
+              <span className="max-w-[90px] truncate">{activeWorkout.routineName}</span>
             </button>
           )}
 
-          {/* Tools & Calculators */}
+          {/* KG / LBS Unit Switcher */}
+          <button
+            onClick={() => setWeightUnit(weightUnit === 'kg' ? 'lbs' : 'kg')}
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#121622] hover:bg-[#161B28] border border-slate-800 text-xs font-bold text-slate-300 transition-colors"
+            title="Toggle weight unit"
+          >
+            <Scale className="w-3.5 h-3.5 text-slate-400" />
+            <span className="uppercase text-[11px] text-blue-400">{weightUnit}</span>
+          </button>
+
+          {/* Language Selector Dropdown */}
+          <div className="relative" ref={langRef}>
+            <button
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#121622] hover:bg-[#161B28] border border-slate-800 text-xs font-semibold text-slate-300 transition-colors cursor-pointer"
+              title="Select Language"
+            >
+              <span className="text-sm leading-none">{currentLang.flag}</span>
+              <span className="hidden sm:inline text-xs">{currentLang.code.toUpperCase()}</span>
+              <ChevronDown className="w-3 h-3 text-slate-400" />
+            </button>
+
+            {isLangOpen && (
+              <div className="absolute right-0 mt-2 w-44 bg-[#121622] border border-slate-700/80 rounded-2xl shadow-2xl py-1 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-800">
+                  Select Language
+                </div>
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      setLanguage(lang.code);
+                      setIsLangOpen(false);
+                    }}
+                    className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left transition-colors cursor-pointer ${
+                      language === lang.code
+                        ? 'bg-blue-600/20 text-blue-400 font-bold'
+                        : 'text-slate-300 hover:bg-slate-800/60'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span>{lang.flag}</span>
+                      <span>{lang.name}</span>
+                    </span>
+                    {language === lang.code && <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Gym Tools */}
           <button
             onClick={() => setIsToolsModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 border border-gray-700 text-xs font-medium transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#121622] hover:bg-[#161B28] text-slate-300 border border-slate-800 text-xs font-medium transition-colors"
             title="1RM & Plate Calculator"
           >
-            <Calculator className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="hidden lg:inline">Gym Tools</span>
+            <Calculator className="w-3.5 h-3.5 text-blue-400" />
+            <span className="hidden xl:inline">Tools</span>
           </button>
 
-          {/* Quick Add (+) */}
+          {/* Quick Add Button */}
           <button
             onClick={() => setIsQuickAddOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 text-white text-xs font-semibold shadow-md shadow-orange-500/20 active:scale-95 transition-all"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md shadow-blue-600/30 active:scale-95 transition-all cursor-pointer"
           >
-            <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">Log Quick</span>
+            <Plus className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Log</span>
           </button>
 
-          {/* Supabase status / config */}
+          {/* Supabase Status Button */}
           <button
             onClick={() => setIsSupabaseModalOpen(true)}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
               supabaseConfig.isConnected
                 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20'
-                : 'bg-gray-800/80 border-gray-700 text-gray-400 hover:text-gray-200'
+                : 'bg-[#121622] border-slate-800 text-slate-400 hover:text-slate-200'
             }`}
-            title="Supabase Cloud Backup"
+            title="Supabase Cloud Synchronization"
           >
             <Cloud className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="hidden lg:inline">
-              {supabaseConfig.isConnected ? 'Cloud Synced' : 'Supabase'}
+            <span className="hidden lg:inline text-[11px]">
+              {supabaseConfig.isConnected ? 'Cloud' : 'Backup'}
             </span>
             {supabaseConfig.isConnected && <CheckCircle2 className="w-3 h-3 text-emerald-400" />}
           </button>

@@ -10,12 +10,22 @@ import { DEFAULT_ROUTINES } from '../data/defaultRoutines';
 import { PREBUILT_DIET_PLANS } from '../data/prebuiltDietPlans';
 import { soundEffects } from '../services/audioService';
 import { supabaseManager } from '../services/supabaseClient';
+import { SupportedLanguage, TranslationKey, translations } from '../i18n/translations';
 
-export type NavTab = 'workouts' | 'exercises' | 'nutrition' | 'indian_diet' | 'body_tracker' | 'tools';
+export type NavTab = 'home' | 'workouts' | 'exercises' | 'nutrition' | 'indian_diet' | 'body_tracker' | 'tools';
 
 interface AppContextType {
   activeTab: NavTab;
   setActiveTab: (tab: NavTab) => void;
+
+  // Language & Localization
+  language: SupportedLanguage;
+  setLanguage: (lang: SupportedLanguage) => void;
+  t: (key: TranslationKey) => string;
+
+  // Weight Unit
+  weightUnit: 'kg' | 'lbs';
+  setWeightUnit: (unit: 'kg' | 'lbs') => void;
 
   // Profile & Targets
   profile: UserProfile;
@@ -105,8 +115,34 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activeTab, setActiveTab] = useState<NavTab>('workouts');
+  const [activeTab, setActiveTab] = useState<NavTab>('home');
   const [selectedDate, setSelectedDate] = useState<string>(getTodayDateString());
+
+  // Localization (Default English)
+  const [language, setLanguageState] = useState<SupportedLanguage>(() => {
+    const saved = localStorage.getItem('fitrack_language') as SupportedLanguage;
+    return saved && translations[saved] ? saved : 'en';
+  });
+
+  const setLanguage = (lang: SupportedLanguage) => {
+    setLanguageState(lang);
+    localStorage.setItem('fitrack_language', lang);
+  };
+
+  const t = (key: TranslationKey): string => {
+    return translations[language]?.[key] || translations.en[key] || key;
+  };
+
+  // Weight Unit (kg vs lbs)
+  const [weightUnit, setWeightUnitState] = useState<'kg' | 'lbs'>(() => {
+    const saved = localStorage.getItem('fitrack_weight_unit');
+    return saved === 'lbs' ? 'lbs' : 'kg';
+  });
+
+  const setWeightUnit = (unit: 'kg' | 'lbs') => {
+    setWeightUnitState(unit);
+    localStorage.setItem('fitrack_weight_unit', unit);
+  };
 
   // Modals
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
@@ -121,7 +157,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
     return {
       id: 'user-demo-1',
-      fullName: 'Aditya (Desi Lifter)',
+      fullName: 'Aditya',
       age: 24,
       gender: 'male',
       heightCm: 178,
@@ -974,6 +1010,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       value={{
         activeTab,
         setActiveTab,
+        language,
+        setLanguage,
+        t,
+        weightUnit,
+        setWeightUnit,
         profile,
         updateProfile,
         macroTargets,

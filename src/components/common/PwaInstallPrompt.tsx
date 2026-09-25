@@ -107,12 +107,12 @@ export const PwaInstallPrompt: React.FC = () => {
     <>
       {/* Floating Bottom App Install Banner */}
       <div className="fixed bottom-20 md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300">
-        <div className="bg-[#161922]/95 backdrop-blur-xl border border-orange-500/30 rounded-2xl p-4 shadow-2xl shadow-black/80 flex items-start gap-3 relative overflow-hidden">
-          {/* Subtle Orange Glow Ambient */}
-          <div className="absolute -top-10 -right-10 w-24 h-24 bg-orange-500/20 rounded-full blur-2xl pointer-events-none" />
+        <div className="bg-[#121622]/95 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-4 shadow-2xl shadow-black/80 flex items-start gap-3 relative overflow-hidden">
+          {/* Subtle Blue Glow Ambient */}
+          <div className="absolute -top-10 -right-10 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
 
           {/* App Icon */}
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/20">
+          <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/20">
             <Smartphone className="w-6 h-6" />
           </div>
 
@@ -120,25 +120,25 @@ export const PwaInstallPrompt: React.FC = () => {
           <div className="flex-1 min-w-0 pr-6">
             <div className="flex items-center gap-1.5">
               <h4 className="font-bold text-white text-sm tracking-wide">Install FITRACK App</h4>
-              <span className="text-[10px] bg-orange-500/20 text-orange-400 font-semibold px-1.5 py-0.5 rounded border border-orange-500/30">
+              <span className="text-[10px] bg-blue-500/20 text-blue-400 font-semibold px-1.5 py-0.5 rounded border border-blue-500/30">
                 PWA
               </span>
             </div>
-            <p className="text-xs text-gray-300 mt-1 line-clamp-2 leading-relaxed">
+            <p className="text-xs text-slate-300 mt-1 line-clamp-2 leading-relaxed">
               100% Offline Gym Logging. Open instantly from your home screen without a browser.
             </p>
 
             <div className="flex items-center gap-2 mt-3">
               <button
                 onClick={handleInstallClick}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white rounded-lg text-xs font-semibold shadow-md shadow-orange-500/20 transition-transform active:scale-95 cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold shadow-md shadow-blue-600/30 transition-transform active:scale-95 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
                 {isIOS ? 'Install on iOS' : 'Install App'}
               </button>
               <button
                 onClick={dismissPrompt}
-                className="px-2.5 py-1.5 bg-gray-800/80 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium transition cursor-pointer"
+                className="px-2.5 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium transition cursor-pointer"
               >
                 Later
               </button>

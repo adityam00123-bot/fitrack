@@ -9,55 +9,59 @@ import {
   Dumbbell,
   History,
   TrendingUp,
-  Sparkles,
-  Trophy,
   Flame,
-  Plus
+  Plus,
+  Zap,
+  Layers
 } from 'lucide-react';
 
 export const WorkoutDashboard: React.FC = () => {
-  const { activeWorkout, workoutHistory, startWorkout } = useApp();
+  const { activeWorkout, workoutHistory, startWorkout, weightUnit, t } = useApp();
   const [subTab, setSubTab] = useState<'routines' | 'history'>('routines');
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [routineToEdit, setRoutineToEdit] = useState<WorkoutRoutine | null>(null);
 
-  // If a workout session is currently active, render the live logger directly!
+  // If a workout session is currently active, render the live logger directly
   if (activeWorkout) {
     return <ActiveWorkoutLogger />;
   }
 
   // Calculate high-level stats
   const totalWorkouts = workoutHistory.length;
-  const totalVolume = workoutHistory.reduce((acc, w) => acc + w.totalVolumeKg, 0);
+  const totalVolume = workoutHistory.reduce((acc, w) => acc + (w.totalVolumeKg || 0), 0);
+  const displayVolume =
+    weightUnit === 'lbs'
+      ? `${Math.round(totalVolume * 2.20462).toLocaleString()} lbs`
+      : `${Math.round(totalVolume).toLocaleString()} kg`;
 
   return (
-    <div className="space-y-6">
-      {/* Hero Banner with Quick Start */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 p-6 sm:p-8 text-white shadow-xl shadow-orange-950/20">
+    <div className="space-y-6 max-w-6xl mx-auto">
+      {/* Sleek Hero Header */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#141A28] to-[#0F1420] border border-slate-800/80 p-6 sm:p-8 text-white shadow-xl">
         <div className="relative z-10 max-w-2xl">
           <div className="flex items-center gap-2 mb-2">
-            <span className="p-1.5 rounded-lg bg-white/20 backdrop-blur-sm text-white">
-              <Flame className="w-4 h-4" />
+            <span className="p-1 rounded-md bg-blue-600/20 text-blue-400">
+              <Zap className="w-3.5 h-3.5" />
             </span>
-            <span className="text-xs font-bold uppercase tracking-wider text-orange-100">
-              Desi Iron Mode • Wger Clone
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-400">
+              Gym Logger & Progression
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white mb-2">
-            Ready to Lift Today, Bhai?
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
+            Workout Session Manager
           </h1>
-          <p className="text-sm sm:text-base text-white/90 mb-6 font-medium">
-            Track weights, reps, rest timer, and volume progression with zero distraction.
+          <p className="text-xs sm:text-sm text-slate-400 mb-6 font-medium leading-relaxed">
+            Execute routines, record working sets and RPE, monitor rest intervals, and track progressive overload.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => startWorkout()}
-              className="px-5 py-3 rounded-2xl bg-white text-gray-900 hover:bg-orange-50 font-bold text-sm shadow-lg shadow-black/20 flex items-center gap-2 active:scale-95 transition-all"
+              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-md shadow-blue-600/30 flex items-center gap-2 active:scale-95 transition-all cursor-pointer"
             >
-              <Dumbbell className="w-4 h-4 text-orange-600" />
-              <span>Start Free Workout</span>
+              <Dumbbell className="w-4 h-4 text-white" />
+              <span>{t('startEmptyWorkout')}</span>
             </button>
 
             <button
@@ -65,41 +69,55 @@ export const WorkoutDashboard: React.FC = () => {
                 setRoutineToEdit(null);
                 setIsEditorOpen(true);
               }}
-              className="px-4 py-3 rounded-2xl bg-black/30 hover:bg-black/40 border border-white/25 text-white font-semibold text-sm backdrop-blur-sm flex items-center gap-2 transition-all"
+              className="px-4 py-2.5 rounded-xl bg-[#1A2132] hover:bg-[#20293E] border border-slate-700 text-slate-200 font-semibold text-xs flex items-center gap-2 transition-all cursor-pointer"
             >
-              <Plus className="w-4 h-4" />
-              <span>Create New Routine</span>
+              <Plus className="w-4 h-4 text-slate-400" />
+              <span>{t('createRoutine')}</span>
             </button>
           </div>
         </div>
 
-        {/* Athletic Background Accents */}
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-15 pointer-events-none flex items-center justify-end pr-4">
-          <Dumbbell className="w-72 h-72 transform rotate-12" />
+        {/* High-level stats counter on right */}
+        <div className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 items-center gap-6">
+          <div className="text-right">
+            <span className="text-[11px] text-slate-400 uppercase tracking-wider block font-semibold">
+              Completed
+            </span>
+            <span className="text-2xl font-black text-white">{totalWorkouts}</span>
+            <span className="text-xs text-slate-400 block">sessions</span>
+          </div>
+          <div className="w-px h-10 bg-slate-800" />
+          <div className="text-right">
+            <span className="text-[11px] text-slate-400 uppercase tracking-wider block font-semibold">
+              Total Tonnage
+            </span>
+            <span className="text-2xl font-black text-blue-400">{displayVolume}</span>
+            <span className="text-xs text-slate-400 block">lifted</span>
+          </div>
         </div>
       </div>
 
-      {/* Sub navigation bar */}
-      <div className="flex items-center justify-between border-b border-gray-800 pb-3">
+      {/* Sub-navigation bar */}
+      <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSubTab('routines')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               subTab === 'routines'
-                ? 'bg-orange-500/15 border border-orange-500/30 text-orange-400'
-                : 'text-gray-400 hover:text-white'
+                ? 'bg-blue-600/15 border border-blue-500/30 text-blue-400'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
-            <Dumbbell className="w-4 h-4" />
-            <span>Routines & Splits</span>
+            <Layers className="w-4 h-4" />
+            <span>{t('routines')}</span>
           </button>
 
           <button
             onClick={() => setSubTab('history')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               subTab === 'history'
-                ? 'bg-orange-500/15 border border-orange-500/30 text-orange-400'
-                : 'text-gray-400 hover:text-white'
+                ? 'bg-blue-600/15 border border-blue-500/30 text-blue-400'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             <History className="w-4 h-4" />
