@@ -36,6 +36,7 @@ export interface Exercise {
   tips?: string[];
   imageUrl?: string;
   gifUrl?: string;
+  videoUrl?: string;
   images?: string[];
   isCustom?: boolean;
 }

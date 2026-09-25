@@ -6,6 +6,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   // CHEST
   {
     id: 'ex-bench-press',
+    videoUrl: '/exercises/barbell_bench_press.mp4',
     name: 'Barbell Bench Press',
     category: 'chest',
     secondaryMuscles: ['triceps', 'shoulders'],
@@ -44,6 +45,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-dips-chest',
+    videoUrl: '/exercises/chest_dip.mp4',
     name: 'Chest Dips',
     category: 'chest',
     secondaryMuscles: ['triceps', 'shoulders'],
@@ -97,6 +99,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   // BACK
   {
     id: 'ex-deadlift',
+    videoUrl: '/exercises/barbell_deadlift.mp4',
     name: 'Conventional Barbell Deadlift',
     category: 'back',
     secondaryMuscles: ['glutes', 'hamstrings', 'forearms', 'core'],
@@ -114,6 +117,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-barbell-row',
+    videoUrl: '/exercises/barbell_bent_over_row.mp4',
     name: 'Barbell Bent-Over Row',
     category: 'back',
     secondaryMuscles: ['biceps', 'shoulders', 'core'],
@@ -131,6 +135,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-pull-up',
+    videoUrl: '/exercises/pull_up.mp4',
     name: 'Pull-Up (Pronated Grip)',
     category: 'back',
     secondaryMuscles: ['biceps', 'forearms'],
@@ -148,6 +153,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-lat-pulldown',
+    videoUrl: '/exercises/lat_pulldown.mp4',
     name: 'Lat Pulldown',
     category: 'back',
     secondaryMuscles: ['biceps'],
@@ -184,6 +190,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   // SHOULDERS
   {
     id: 'ex-overhead-press',
+    videoUrl: '/exercises/overhead_press.mp4',
     name: 'Overhead Barbell Military Press (OHP)',
     category: 'shoulders',
     secondaryMuscles: ['triceps', 'core'],
@@ -201,6 +208,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-db-lateral-raise',
+    videoUrl: '/exercises/lateral_raise.mp4',
     name: 'Dumbbell Lateral Raise',
     category: 'shoulders',
     secondaryMuscles: ['forearms'],
@@ -237,6 +245,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   // LEGS - QUADS, HAMSTRINGS, GLUTES, CALVES
   {
     id: 'ex-barbell-squat',
+    videoUrl: '/exercises/barbell_squat.mp4',
     name: 'Barbell Back Squat',
     category: 'quads',
     secondaryMuscles: ['glutes', 'hamstrings', 'core'],
@@ -255,6 +264,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-leg-press',
+    videoUrl: '/exercises/leg_press.mp4',
     name: '45-Degree Leg Press',
     category: 'quads',
     secondaryMuscles: ['glutes', 'hamstrings'],
@@ -272,6 +282,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-romanian-deadlift',
+    videoUrl: '/exercises/romanian_deadlift.mp4',
     name: 'Romanian Deadlift (RDL)',
     category: 'hamstrings',
     secondaryMuscles: ['glutes', 'back'],
@@ -360,6 +371,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   // ARMS - BICEPS & TRICEPS
   {
     id: 'ex-barbell-curl',
+    videoUrl: '/exercises/barbell_curl.mp4',
     name: 'Barbell Bicep Curl',
     category: 'biceps',
     secondaryMuscles: ['forearms'],
@@ -411,6 +423,7 @@ export const CURATED_EXERCISES: Exercise[] = [
   },
   {
     id: 'ex-cable-pushdown',
+    videoUrl: '/exercises/cable_pushdown.mp4',
     name: 'Tricep Rope Pushdown',
     category: 'triceps',
     secondaryMuscles: ['forearms'],

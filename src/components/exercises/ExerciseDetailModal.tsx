@@ -13,7 +13,8 @@ import {
   Info,
   Clock,
   Eye,
-  Camera
+  Camera,
+  Gauge
 } from 'lucide-react';
 
 interface ExerciseDetailModalProps {
@@ -29,44 +30,64 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 }) => {
   if (!exercise) return null;
 
+  const hasVideo = Boolean(exercise.videoUrl);
   const hasRealPhotos = Boolean(exercise.images && exercise.images.length > 0);
-  const [viewMode, setViewMode] = useState<'3d_anatomy' | 'real_photos'>('3d_anatomy');
 
-  const [isFrozen, setIsFrozen] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
+  const [viewMode, setViewMode] = useState<'video' | '3d_gif' | 'real_photos'>(
+    hasVideo ? 'video' : '3d_gif'
+  );
+
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [videoSpeed, setVideoSpeed] = useState<number>(0.75); // 0.75x is smooth & controlled
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const [mediaLoaded, setMediaLoaded] = useState(false);
+  const [mediaError, setMediaError] = useState(false);
 
+  const videoRef = useRef<HTMLVideoElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Freeze/Pause GIF by capturing the current frame to canvas
-  const handleToggleFreeze = () => {
-    if (!isFrozen && imgRef.current && canvasRef.current) {
-      const canvas = canvasRef.current;
-      const img = imgRef.current;
-      canvas.width = img.naturalWidth || img.width || 400;
-      canvas.height = img.naturalHeight || img.height || 400;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        setIsFrozen(true);
+  // Synchronize video playback speed
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = videoSpeed;
+    }
+  }, [videoSpeed, viewMode, exercise.id]);
+
+  // Handle Play/Pause toggle
+  const togglePlayPause = () => {
+    if (viewMode === 'video' && videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
       }
-    } else {
-      setIsFrozen(false);
+    } else if (viewMode === '3d_gif') {
+      if (isPlaying && imgRef.current && canvasRef.current) {
+        const canvas = canvasRef.current;
+        const img = imgRef.current;
+        canvas.width = img.naturalWidth || img.width || 400;
+        canvas.height = img.naturalHeight || img.height || 400;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          setIsPlaying(false);
+        }
+      } else {
+        setIsPlaying(true);
+      }
     }
   };
 
   useEffect(() => {
-    setIsFrozen(false);
-    setImageLoaded(false);
-    setImageError(false);
+    setIsPlaying(true);
+    setMediaLoaded(false);
+    setMediaError(false);
     setActivePhotoIndex(0);
-    setViewMode('3d_anatomy');
-  }, [exercise.id]);
-
-  const gifUrl = exercise.gifUrl || exercise.imageUrl;
-  const currentPhotoUrl = exercise.images && exercise.images[activePhotoIndex];
+    setViewMode(hasVideo ? 'video' : '3d_gif');
+  }, [exercise.id, hasVideo]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4 animate-fade-in">
@@ -84,6 +105,11 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[11px] font-semibold capitalize border border-emerald-500/30">
                 {exercise.difficulty}
               </span>
+              {hasVideo && (
+                <span className="px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 text-[10px] font-bold border border-cyan-500/30">
+                  60 FPS HD
+                </span>
+              )}
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">{exercise.name}</h3>
           </div>
@@ -98,31 +124,25 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 
         {/* Content Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-5 flex-1">
-          {/* View Mode Switcher (3D Anatomy Hevy Style vs Real Gym Photos) */}
+          {/* View Mode Switcher if Real Photos or Video available */}
           {hasRealPhotos && (
             <div className="flex items-center justify-between bg-gray-850 p-1.5 rounded-2xl border border-gray-750 text-xs">
-              <span className="text-[11px] font-bold text-gray-400 pl-2">Display Style:</span>
+              <span className="text-[11px] font-bold text-gray-400 pl-2">Display Mode:</span>
               <div className="flex gap-1 font-bold">
                 <button
-                  onClick={() => {
-                    setViewMode('3d_anatomy');
-                    setIsFrozen(false);
-                  }}
+                  onClick={() => setViewMode(hasVideo ? 'video' : '3d_gif')}
                   className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
-                    viewMode === '3d_anatomy'
+                    viewMode !== 'real_photos'
                       ? 'bg-gradient-to-r from-orange-500 to-rose-600 text-white shadow-md shadow-orange-500/20'
                       : 'text-gray-400 hover:text-white'
                   }`}
                 >
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>3D Anatomy (Hevy Style)</span>
+                  <span>{hasVideo ? '60 FPS Video (Hevy Native)' : '3D Anatomy Model'}</span>
                 </button>
 
                 <button
-                  onClick={() => {
-                    setViewMode('real_photos');
-                    setIsFrozen(false);
-                  }}
+                  onClick={() => setViewMode('real_photos')}
                   className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
                     viewMode === 'real_photos'
                       ? 'bg-gradient-to-r from-orange-500 to-rose-600 text-white shadow-md shadow-orange-500/20'
@@ -139,117 +159,152 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
           {/* Media Player Box */}
           <div className="rounded-3xl overflow-hidden border border-gray-800 bg-gray-950/90 shadow-inner relative group flex flex-col items-center">
             <div className="w-full aspect-[4/3] sm:aspect-video max-h-80 flex items-center justify-center p-2 relative bg-black/50">
-              {!imageLoaded && !imageError && (
+              {!mediaLoaded && !mediaError && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-900/80">
                   <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
-                  <span className="text-xs text-gray-400 font-semibold">Loading animation...</span>
+                  <span className="text-xs text-gray-400 font-semibold">Loading exercise visual...</span>
                 </div>
               )}
 
-              {/* Mode 1: 3D Anatomy GIF (Hevy Style) */}
-              {viewMode === '3d_anatomy' && gifUrl && !imageError && (
+              {/* View 1: 60 FPS Native MP4 Video (Exact Hevy Asset with 0% Blur) */}
+              {viewMode === 'video' && exercise.videoUrl && (
+                <video
+                  ref={videoRef}
+                  src={exercise.videoUrl}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  onLoadedData={() => {
+                    setMediaLoaded(true);
+                    if (videoRef.current) videoRef.current.playbackRate = videoSpeed;
+                  }}
+                  onError={() => setViewMode('3d_gif')}
+                  className={`w-full h-full object-contain rounded-2xl transition-opacity duration-300 ${
+                    mediaLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+              )}
+
+              {/* View 2: Fallback 3D Animated GIF */}
+              {viewMode === '3d_gif' && (exercise.gifUrl || exercise.imageUrl) && (
                 <>
                   <img
                     ref={imgRef}
-                    src={gifUrl}
-                    alt={`${exercise.name} full motion guide`}
+                    src={exercise.gifUrl || exercise.imageUrl}
+                    alt={`${exercise.name} demonstration`}
+                    onLoad={() => setMediaLoaded(true)}
+                    onError={() => setMediaError(true)}
                     className={`w-full h-full object-contain rounded-2xl transition-opacity duration-300 ${
-                      imageLoaded && !isFrozen ? 'opacity-100' : isFrozen ? 'hidden' : 'opacity-0'
+                      mediaLoaded && isPlaying ? 'opacity-100' : !isPlaying ? 'hidden' : 'opacity-0'
                     }`}
-                    onLoad={() => setImageLoaded(true)}
-                    onError={() => setImageError(true)}
-                    loading="eager"
                   />
-
-                  {/* Frozen Frame Canvas */}
                   <canvas
                     ref={canvasRef}
-                    className={`w-full h-full object-contain rounded-2xl ${isFrozen ? 'block' : 'hidden'}`}
+                    className={`w-full h-full object-contain rounded-2xl ${!isPlaying ? 'block' : 'hidden'}`}
                   />
                 </>
               )}
 
-              {/* Mode 2: Real Gym Photos (Start vs Lockout) */}
-              {viewMode === 'real_photos' && currentPhotoUrl && (
+              {/* View 3: Real Gym Photos */}
+              {viewMode === 'real_photos' && exercise.images && (
                 <img
-                  src={currentPhotoUrl}
+                  src={exercise.images[activePhotoIndex]}
                   alt={`${exercise.name} photo phase ${activePhotoIndex + 1}`}
                   className="w-full h-full object-contain rounded-2xl"
-                  loading="eager"
+                  onLoad={() => setMediaLoaded(true)}
                 />
               )}
 
               {/* Status Badge */}
               <div className="absolute top-3 left-3 px-2.5 py-1 rounded-xl bg-black/80 backdrop-blur text-[11px] font-bold text-orange-400 border border-orange-500/30 flex items-center gap-1.5 shadow-md">
-                <span className={`w-2 h-2 rounded-full ${isFrozen ? 'bg-amber-400' : 'bg-emerald-400 animate-pulse'}`} />
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    !isPlaying ? 'bg-amber-400' : hasVideo && viewMode === 'video' ? 'bg-cyan-400 animate-pulse' : 'bg-emerald-400 animate-pulse'
+                  }`}
+                />
                 <span>
-                  {viewMode === '3d_anatomy'
-                    ? isFrozen
-                      ? 'Frame Paused (Inspect Form)'
-                      : 'Hevy 3D Anatomy Model'
-                    : `Real Photo: ${activePhotoIndex === 0 ? 'Starting Stretch' : 'Peak Contraction'}`}
+                  {viewMode === 'video'
+                    ? isPlaying
+                      ? `60 FPS Smooth Video (${videoSpeed}x Speed)`
+                      : 'Video Paused'
+                    : viewMode === '3d_gif'
+                    ? isPlaying
+                      ? '3D Animated Model'
+                      : 'Frame Paused'
+                    : `Real Photo: ${activePhotoIndex === 0 ? 'Starting Stretch' : 'Peak Lockout'}`}
                 </span>
               </div>
             </div>
 
-            {/* Bottom Controls Bar */}
-            <div className="w-full px-4 py-2.5 bg-gray-900/90 border-t border-gray-800 flex items-center justify-between gap-3 text-xs">
-              {viewMode === '3d_anatomy' ? (
-                <>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={handleToggleFreeze}
-                      className="px-3 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold border border-orange-500/30 flex items-center gap-1.5 transition-colors"
-                    >
-                      {isFrozen ? (
-                        <>
-                          <Play className="w-3.5 h-3.5 fill-orange-400" />
-                          <span>Resume Loop</span>
-                        </>
-                      ) : (
-                        <>
-                          <Pause className="w-3.5 h-3.5" />
-                          <span>Pause / Freeze Frame</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
+            {/* Bottom Playback & Speed Controls */}
+            <div className="w-full px-4 py-2.5 bg-gray-900/90 border-t border-gray-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={togglePlayPause}
+                  className="px-3.5 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold border border-orange-500/30 flex items-center gap-1.5 transition-colors"
+                >
+                  {isPlaying ? (
+                    <>
+                      <Pause className="w-3.5 h-3.5" />
+                      <span>Pause</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-3.5 h-3.5 fill-orange-400" />
+                      <span>Play</span>
+                    </>
+                  )}
+                </button>
 
-                  <span className="text-[11px] text-gray-400 italic">
-                    Tap Pause anytime to inspect joint alignment
-                  </span>
-                </>
-              ) : (
-                <div className="w-full flex items-center justify-between">
-                  <span className="text-gray-400 font-medium">Select Position:</span>
-                  <div className="flex items-center gap-1.5">
-                    {exercise.images?.map((_, i) => (
+                {/* Speed Controls for 60fps Video */}
+                {viewMode === 'video' && (
+                  <div className="flex items-center gap-1 bg-gray-850 p-1 rounded-xl border border-gray-750">
+                    <Gauge className="w-3 h-3 text-gray-400 ml-1.5 mr-0.5" />
+                    {[
+                      { speed: 0.5, label: '0.5x Slow' },
+                      { speed: 0.75, label: '0.75x Tempo' },
+                      { speed: 1.0, label: '1.0x Normal' }
+                    ].map((s) => (
                       <button
-                        key={i}
-                        onClick={() => setActivePhotoIndex(i)}
-                        className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
-                          activePhotoIndex === i
+                        key={s.speed}
+                        onClick={() => setVideoSpeed(s.speed)}
+                        className={`px-2 py-0.5 rounded-lg text-[11px] font-bold transition-all ${
+                          videoSpeed === s.speed
                             ? 'bg-orange-500 text-white shadow-sm'
-                            : 'bg-gray-800 text-gray-400 hover:text-white'
+                            : 'text-gray-400 hover:text-white'
                         }`}
                       >
-                        {i === 0 ? 'Phase 1: Setup' : 'Phase 2: Lockout'}
+                        {s.label}
                       </button>
                     ))}
                   </div>
+                )}
+              </div>
+
+              {viewMode === 'real_photos' && exercise.images && (
+                <div className="flex items-center gap-1.5">
+                  {exercise.images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActivePhotoIndex(i)}
+                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                        activePhotoIndex === i
+                          ? 'bg-orange-500 text-white shadow-sm'
+                          : 'bg-gray-800 text-gray-400 hover:text-white'
+                      }`}
+                    >
+                      {i === 0 ? 'Phase 1: Setup' : 'Phase 2: Lockout'}
+                    </button>
+                  ))}
                 </div>
               )}
-            </div>
-          </div>
 
-          {/* Bar-Path & Kinetic Chain Note */}
-          <div className="p-3.5 rounded-2xl bg-gray-850/60 border border-gray-800 flex items-start gap-2.5 text-xs text-gray-400">
-            <Info className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-gray-200 block mb-0.5">Why the motion blur / ghosting in the middle?</strong>
-              <p className="leading-relaxed">
-                Just like in <strong>Hevy</strong> and <strong>FitNotes</strong>, 3D anatomical models use ghosting motion blur between the starting position and peak contraction to visualize the <strong>Bar Path trajectory</strong> while keeping the animation ultra-lightweight and smooth on mobile networks.
-              </p>
+              {viewMode !== 'real_photos' && (
+                <span className="text-[11px] text-gray-400 hidden sm:inline italic">
+                  {hasVideo ? 'Zero motion blur • Smooth 60 FPS playback' : 'Inspect form cues below'}
+                </span>
+              )}
             </div>
           </div>
 
