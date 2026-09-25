@@ -67,6 +67,21 @@ export const DEFAULT_ROUTINES: WorkoutRoutine[] = [
     ]
   },
   {
+    id: 'routine-lower-body',
+    name: 'Lower Body Strength & Calves',
+    description: 'Lower half of the 4-day Upper/Lower split. Builds quad power, hamstring elasticity, and calf density.',
+    category: 'Upper/Lower',
+    daysPerWeek: 4,
+    isDefault: true,
+    exercises: [
+      { exerciseId: 'ex-barbell-squat', exerciseName: 'Barbell Back Squat', category: 'quads', targetSets: 4, targetReps: '6-8', restSeconds: 150, notes: 'Full depth, explosive ascent' },
+      { exerciseId: 'ex-romanian-deadlift', exerciseName: 'Romanian Deadlift (RDL)', category: 'hamstrings', targetSets: 4, targetReps: '8-10', restSeconds: 120, notes: 'Hinge back, feel posterior tension' },
+      { exerciseId: 'ex-leg-press', exerciseName: '45-Degree Leg Press', category: 'quads', targetSets: 3, targetReps: '10-12', restSeconds: 90, notes: 'High volume quad burner' },
+      { exerciseId: 'ex-seated-leg-curl', exerciseName: 'Seated Leg Curl', category: 'hamstrings', targetSets: 3, targetReps: '12-15', restSeconds: 60, notes: 'Controlled eccentric 3s' },
+      { exerciseId: 'ex-standing-calf-raise', exerciseName: 'Standing Calf Raise', category: 'calves', targetSets: 4, targetReps: '15-20', restSeconds: 45, notes: '2s stretch at bottom' }
+    ]
+  },
+  {
     id: 'routine-desi-strength',
     name: 'Desi Pehlwan Full Body Strength',
     description: 'Traditional Indian wrestler inspired full-body compound routine. Heavy functional power, grip, endurance, and core resilience.',

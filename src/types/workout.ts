@@ -41,6 +41,8 @@ export interface Exercise {
   isCustom?: boolean;
 }
 
+export type SetType = 'normal' | 'warmup' | 'dropset' | 'failure';
+
 export interface WorkoutSet {
   id: string;
   setNumber: number;
@@ -48,8 +50,10 @@ export interface WorkoutSet {
   reps: number;
   rpe?: number; // 6 to 10
   completed: boolean;
+  setType?: SetType;
   isWarmup?: boolean;
   isDropSet?: boolean;
+  isPR?: boolean;
   notes?: string;
 }
 

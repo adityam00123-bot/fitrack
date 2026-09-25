@@ -38,7 +38,7 @@ class AudioService {
     }
   }
 
-  // Rest timer 3-2-1 countdown beep
+  // Rest timer 3-2-1 countdown beep with mobile haptic vibration
   playBeep(isFinal = false) {
     try {
       this.initCtx();
@@ -58,6 +58,55 @@ class AudioService {
 
       osc.start();
       osc.stop(this.ctx.currentTime + duration);
+
+      // Trigger phone vibration when rest timer finishes!
+      if (isFinal && typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+        navigator.vibrate([200, 100, 200, 100, 400]);
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  // Trigger custom phone vibration
+  vibrate(pattern: number | number[] = 200) {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try {
+        navigator.vibrate(pattern);
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  // PR (Personal Record) celebration chime
+  playPRFanfare() {
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+      // High triumph chords: G5 -> C6 -> E6
+      const notes = [783.99, 1046.5, 1318.51];
+      notes.forEach((freq, idx) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        const startTime = this.ctx.currentTime + idx * 0.1;
+        const duration = idx === notes.length - 1 ? 0.4 : 0.12;
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.35, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      });
+
+      this.vibrate([150, 80, 250]);
     } catch {
       // ignore
     }
@@ -88,6 +137,8 @@ class AudioService {
         osc.start(startTime);
         osc.stop(startTime + duration);
       });
+
+      this.vibrate([200, 100, 300, 100, 500]);
     } catch {
       // ignore
     }

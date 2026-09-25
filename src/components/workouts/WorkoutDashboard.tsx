@@ -4,6 +4,7 @@ import { ActiveWorkoutLogger } from './ActiveWorkoutLogger';
 import { RoutineList } from './RoutineList';
 import { WorkoutHistory } from './WorkoutHistory';
 import { RoutineEditorModal } from './RoutineEditorModal';
+import { WorkoutRoutine } from '../../types/workout';
 import {
   Dumbbell,
   History,
@@ -18,6 +19,7 @@ export const WorkoutDashboard: React.FC = () => {
   const { activeWorkout, workoutHistory, startWorkout } = useApp();
   const [subTab, setSubTab] = useState<'routines' | 'history'>('routines');
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [routineToEdit, setRoutineToEdit] = useState<WorkoutRoutine | null>(null);
 
   // If a workout session is currently active, render the live logger directly!
   if (activeWorkout) {
@@ -59,7 +61,10 @@ export const WorkoutDashboard: React.FC = () => {
             </button>
 
             <button
-              onClick={() => setIsEditorOpen(true)}
+              onClick={() => {
+                setRoutineToEdit(null);
+                setIsEditorOpen(true);
+              }}
               className="px-4 py-3 rounded-2xl bg-black/30 hover:bg-black/40 border border-white/25 text-white font-semibold text-sm backdrop-blur-sm flex items-center gap-2 transition-all"
             >
               <Plus className="w-4 h-4" />
@@ -105,15 +110,28 @@ export const WorkoutDashboard: React.FC = () => {
 
       {/* Tab Content */}
       {subTab === 'routines' ? (
-        <RoutineList onOpenCreateRoutine={() => setIsEditorOpen(true)} />
+        <RoutineList
+          onOpenCreateRoutine={() => {
+            setRoutineToEdit(null);
+            setIsEditorOpen(true);
+          }}
+          onEditRoutine={(r) => {
+            setRoutineToEdit(r);
+            setIsEditorOpen(true);
+          }}
+        />
       ) : (
         <WorkoutHistory />
       )}
 
-      {/* Routine Creator Modal */}
+      {/* Routine Creator / Editor Modal */}
       <RoutineEditorModal
         isOpen={isEditorOpen}
-        onClose={() => setIsEditorOpen(false)}
+        routineToEdit={routineToEdit}
+        onClose={() => {
+          setIsEditorOpen(false);
+          setRoutineToEdit(null);
+        }}
       />
     </div>
   );
