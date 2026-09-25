@@ -435,5 +435,130 @@ export const INITIAL_EXERCISES: Exercise[] = [
       'Hold position with steady breathing.'
     ],
     tips: ['Do not let hips drop or pike upward.']
+  },
+
+  // FOREARMS
+  {
+    id: 'ex-wrist-curls',
+    name: 'Seated Barbell Wrist Curl',
+    category: 'forearms',
+    secondaryMuscles: ['biceps'],
+    equipment: 'barbell',
+    difficulty: 'beginner',
+    instructions: [
+      'Sit on bench resting forearms on thighs with wrists hanging off knees palms up.',
+      'Allow barbell to roll down fingers, then curl fingers and wrists upward.',
+      'Squeeze forearms hard at peak contraction.',
+      'Lower slowly over 2 seconds.'
+    ],
+    tips: ['Do not lift forearms off thighs during movement.']
+  },
+  {
+    id: 'ex-reverse-curl',
+    name: 'Standing EZ-Bar Reverse Curl',
+    category: 'forearms',
+    secondaryMuscles: ['biceps'],
+    equipment: 'barbell',
+    difficulty: 'intermediate',
+    instructions: [
+      'Hold EZ bar with pronated (overhand) grip shoulder width.',
+      'Pin elbows to sides and curl bar upwards using brachioradialis.',
+      'Pause at top for 1 second before slow controlled descent.'
+    ],
+    tips: ['Target brachioradialis for forearm thickness and elbow stability.']
+  },
+  {
+    id: 'ex-farmers-walk',
+    name: 'Heavy Dumbbell Farmer’s Walk',
+    category: 'forearms',
+    secondaryMuscles: ['core', 'shoulders'],
+    equipment: 'dumbbell',
+    difficulty: 'intermediate',
+    instructions: [
+      'Deadlift two heavy dumbbells to standing position.',
+      'Brace core, pack lats, look forward.',
+      'Walk forward with short, measured heel-to-toe steps for 40-60 seconds.',
+      'Maintain upright posture without swaying.'
+    ],
+    tips: ['Incredible grip strength and forearm endurance builder.']
+  },
+
+  // GLUTES
+  {
+    id: 'ex-hip-thrust',
+    name: 'Barbell Hip Thrust',
+    category: 'glutes',
+    secondaryMuscles: ['hamstrings', 'quads'],
+    equipment: 'barbell',
+    difficulty: 'intermediate',
+    instructions: [
+      'Sit on floor with upper back against bench, barbell padded across hips.',
+      'Plant feet flat shoulder-width apart, shins vertical at top.',
+      'Drive through heels and extend hips fully upwards.',
+      'Squeeze glutes at top lockout for 1 second, then lower under control.'
+    ],
+    tips: ['Tuck chin and look forward at lockout to prevent lower back hyperextension.']
+  },
+  {
+    id: 'ex-cable-kickback',
+    name: 'Glute Cable Kickback',
+    category: 'glutes',
+    secondaryMuscles: ['hamstrings'],
+    equipment: 'cable',
+    difficulty: 'beginner',
+    instructions: [
+      'Attach ankle cuff to low pulley cable.',
+      'Hinge forward slightly holding machine frame for balance.',
+      'Kick working leg back in an arc, squeezing glute at full extension.',
+      'Control return without letting weight stack touch.'
+    ],
+    tips: ['Keep hips square to the cable tower without rotating pelvis.']
+  },
+
+  // HAMSTRINGS
+  {
+    id: 'ex-seated-leg-curl',
+    name: 'Seated Hamstring Leg Curl',
+    category: 'hamstrings',
+    secondaryMuscles: ['calves'],
+    equipment: 'machine',
+    difficulty: 'beginner',
+    instructions: [
+      'Adjust seat so knee joint aligns with machine pivot axis.',
+      'Secure thigh pad snugly down against quads.',
+      'Flex hamstrings and curl heel pad under seat as far as possible.',
+      'Slowly resist weight stack on 3-second extension.'
+    ],
+    tips: ['Point toes towards shins (dorsiflexion) to maximize hamstring recruitment.']
+  },
+
+  // CALVES
+  {
+    id: 'ex-standing-calf-raise',
+    name: 'Standing Barbell / Machine Calf Raise',
+    category: 'calves',
+    secondaryMuscles: [],
+    equipment: 'machine',
+    difficulty: 'beginner',
+    instructions: [
+      'Place balls of feet on platform ledge, heels hanging off.',
+      'Lower heels deep for a full gastrocnemius stretch (hold 2 seconds).',
+      'Explode onto big toes and hold peak contraction for 1 second.'
+    ],
+    tips: ['Never bounce at bottom of calf raises; pause to eliminate Achilles tendon elasticity.']
+  },
+  {
+    id: 'ex-seated-calf-raise',
+    name: 'Seated Dumbbell / Machine Calf Raise (Soleus)',
+    category: 'calves',
+    secondaryMuscles: [],
+    equipment: 'dumbbell',
+    difficulty: 'beginner',
+    instructions: [
+      'Sit on bench with knees bent 90 degrees, resting dumbbells across knees.',
+      'Elevate balls of feet on block or plate.',
+      'Lower heels for deep stretch, then press high onto toes.'
+    ],
+    tips: ['Bent knee position isolates the deeper soleus calf muscle.']
   }
 ];
