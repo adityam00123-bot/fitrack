@@ -1,4 +1,5 @@
 import { Exercise } from '../types/workout';
+import { ANIMATED_EXERCISES_DATABASE } from './animatedExercisesDatabase';
 import { EXERCISES_DATABASE } from './exercisesDatabase';
 
 export const CURATED_EXERCISES: Exercise[] = [
@@ -10,6 +11,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['triceps', 'shoulders'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0025.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0025.gif',
     instructions: [
       'Lie flat on the bench with eyes directly under the bar.',
       'Grip the bar slightly wider than shoulder-width, wrists straight.',
@@ -29,6 +32,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['shoulders', 'triceps'],
     equipment: 'dumbbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0314.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0314.gif',
     instructions: [
       'Set bench to 30-45 degree incline.',
       'Sit back and kick dumbbells up to shoulders.',
@@ -44,6 +49,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['triceps', 'shoulders'],
     equipment: 'bodyweight',
     difficulty: 'advanced',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0251.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0251.gif',
     instructions: [
       'Hold onto parallel bars and hoist yourself up.',
       'Lean torso forward roughly 30 degrees to engage the lower pecs.',
@@ -59,6 +66,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['shoulders'],
     equipment: 'cable',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0150.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0150.gif',
     instructions: [
       'Set pulleys at shoulder or high level.',
       'Step forward into a staggered stance with elbows slightly bent.',
@@ -74,6 +83,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['triceps', 'core'],
     equipment: 'bodyweight',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0662.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0662.gif',
     instructions: [
       'Hands slightly wider than shoulder-width on the floor.',
       'Keep core braced, glutes squeezed, and body in a straight plank line.',
@@ -91,6 +102,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['glutes', 'hamstrings', 'forearms', 'core'],
     equipment: 'barbell',
     difficulty: 'advanced',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0032.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0032.gif',
     instructions: [
       'Stand with feet hip-width apart, bar over mid-foot.',
       'Hinge hips back and grip bar just outside knees.',
@@ -106,28 +119,32 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['biceps', 'shoulders', 'core'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0027.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0027.gif',
     instructions: [
       'Hinge forward at the hips with knees slightly bent until torso is 45 degrees.',
-      'Pull barbell towards lower ribcage/belly button.',
-      'Squeeze shoulder blades together at the top.',
-      'Lower bar with full lat stretch.'
+      'Grip barbell overhand slightly wider than shoulder-width.',
+      'Pull bar towards your belly button, driving elbows back and up.',
+      'Squeeze shoulder blades together at the top, then lower with control.'
     ],
-    tips: ['Avoid using momentum or jerking with the lower back.']
+    tips: ['Avoid using momentum or jerking torso upright during pull.']
   },
   {
-    id: 'ex-pullup',
+    id: 'ex-pull-up',
     name: 'Pull-Up (Pronated Grip)',
     category: 'back',
     secondaryMuscles: ['biceps', 'forearms'],
     equipment: 'bodyweight',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0652.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0652.gif',
     instructions: [
       'Hang from bar with hands overhand, wider than shoulders.',
-      'Initiate by depressing and retracting shoulder blades.',
-      'Drive elbows down towards hips until chin clears bar.',
-      'Lower back down under full control to a dead hang.'
+      'Retract scapulae and pull chest up towards the bar.',
+      'Lead with elbows until chin clears the bar.',
+      'Lower under control to full dead-hang stretch.'
     ],
-    tips: ['Engage core so body does not swing back and forth.']
+    tips: ['Focus on pulling your elbows down into your back pockets.']
   },
   {
     id: 'ex-lat-pulldown',
@@ -136,21 +153,25 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['biceps'],
     equipment: 'cable',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/2330.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/2330.gif',
     instructions: [
       'Sit comfortably with thigh pads locked snug over knees.',
-      'Grip wide bar with an overhand grip.',
-      'Lean back 10-15 degrees and pull bar down to upper chest.',
-      'Control the weight as it rises back up.'
+      'Grip wide bar overhand.',
+      'Lean back slightly (10-15 degrees), pull bar down to upper chest.',
+      'Squeeze lats at bottom for 1 second, then control bar up.'
     ],
-    tips: ['Think of pulling through your elbows rather than pulling with your forearms.']
+    tips: ['Do not yank weight down with torso swing.']
   },
   {
-    id: 'ex-seated-cable-row',
+    id: 'ex-cable-row',
     name: 'Seated Cable Row',
     category: 'back',
     secondaryMuscles: ['biceps', 'shoulders'],
     equipment: 'cable',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0861.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0861.gif',
     instructions: [
       'Sit on bench with knees slightly bent and feet on footrests.',
       'Pull V-handle attachment into your navel while keeping back upright.',
@@ -168,6 +189,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['triceps', 'core'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/1457.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/1457.gif',
     instructions: [
       'Stand with feet shoulder-width, bar resting across front delts.',
       'Brace core and squeeze glutes tight.',
@@ -183,6 +206,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['forearms'],
     equipment: 'dumbbell',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0334.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0334.gif',
     instructions: [
       'Stand tall holding dumbbells at sides, palms facing inward.',
       'Raise arms out to sides with slight bend in elbows until parallel to floor.',
@@ -198,6 +223,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['back'],
     equipment: 'cable',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0212.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0212.gif',
     instructions: [
       'Attach rope to cable at upper chest/face level.',
       'Hold rope with thumbs backward grip.',
@@ -215,6 +242,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['glutes', 'hamstrings', 'core'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0043.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0043.gif',
     instructions: [
       'Rest barbell securely across upper traps (high bar) or rear delts (low bar).',
       'Feet shoulder-width apart, toes flared slightly 15-30 degrees.',
@@ -231,6 +260,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['glutes', 'hamstrings'],
     equipment: 'machine',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0586.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0586.gif',
     instructions: [
       'Seat firmly with lower back pressed against backrest.',
       'Place feet hip-width on sled platform.',
@@ -246,6 +277,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['glutes', 'back'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0085.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0085.gif',
     instructions: [
       'Hold barbell at hip height with overhand grip.',
       'Keep knees soft (slightly bent, but fixed).',
@@ -262,6 +295,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: [],
     equipment: 'machine',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0585.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0585.gif',
     instructions: [
       'Align knee joints directly with machine pivot point.',
       'Extend legs upwards until quads are fully contracted.',
@@ -277,6 +312,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['calves'],
     equipment: 'machine',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/3235.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/3235.gif',
     instructions: [
       'Adjust thigh pad firmly down over knees.',
       'Curl heels downwards towards your glutes.',
@@ -292,6 +329,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: [],
     equipment: 'machine',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0598.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0598.gif',
     instructions: [
       'Place balls of feet on block with heels hanging off.',
       'Lower heels as far down as possible to achieve full calf stretch.',
@@ -307,6 +346,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['hamstrings', 'core'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0056.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0056.gif',
     instructions: [
       'Sit on floor with upper back against flat bench, padded barbell over hips.',
       'Feet planted flat on floor, shins vertical at top of movement.',
@@ -324,6 +365,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['forearms'],
     equipment: 'barbell',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0031.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0031.gif',
     instructions: [
       'Stand tall holding barbell with shoulder-width underhand grip.',
       'Keep elbows pinned at sides.',
@@ -339,6 +382,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['forearms'],
     equipment: 'dumbbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0315.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0315.gif',
     instructions: [
       'Sit on bench set at 45-60 degree incline.',
       'Let arms hang straight down behind torso for deep long-head stretch.',
@@ -354,41 +399,49 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['forearms'],
     equipment: 'dumbbell',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0313.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0313.gif',
     instructions: [
-      'Hold dumbbells with neutral grip (palms facing each other).',
-      'Curl dumbbells towards shoulders without rotating wrists.',
-      'Squeeze brachialis and brachioradialis at top.'
+      'Stand holding dumbbells with neutral grip (palms facing each other).',
+      'Keep upper arms stationary, curl weight up towards shoulders.',
+      'Squeeze brachialis and forearms at the top.',
+      'Lower slowly under tension.'
     ],
-    tips: ['Builds arm thickness and forearm size.']
+    tips: ['Builds upper arm width and outer bicep fullness.']
   },
   {
-    id: 'ex-tricep-pushdown',
-    name: 'Cable Tricep Rope Pushdown',
+    id: 'ex-cable-pushdown',
+    name: 'Tricep Rope Pushdown',
     category: 'triceps',
-    secondaryMuscles: [],
+    secondaryMuscles: ['forearms'],
     equipment: 'cable',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0201.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0201.gif',
     instructions: [
-      'Grip rope attachment with elbows tucked at ribs.',
-      'Push rope downward until elbows are fully locked.',
-      'Spread the rope ends apart at the bottom for maximal peak contraction.',
-      'Allow hands to come up to chest level for full stretch.'
+      'Attach rope to high pulley.',
+      'Pin elbows to ribcage, lean forward slightly from hips.',
+      'Push rope straight down, spreading rope ends apart at full lockout.',
+      'Allow forearms to come up to parallel before next rep.'
     ],
-    tips: ['Keep upper arms stationary; only forearms should move.']
+    tips: ['Do not let elbows drift forward and backward; keep them locked in place.']
   },
   {
     id: 'ex-skull-crushers',
     name: 'EZ-Bar Skull Crushers (Lying Triceps Extension)',
     category: 'triceps',
-    secondaryMuscles: [],
+    secondaryMuscles: ['shoulders'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0060.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0060.gif',
     instructions: [
-      'Lie flat on bench holding EZ bar with narrow overhand grip above chest.',
-      'Hinge at elbows to lower bar back towards forehead or just behind head.',
-      'Extend elbows back up to lock out triceps.'
+      'Lie flat on bench holding EZ bar with close overhand grip above chest.',
+      'Angle upper arms slightly backwards (towards head) to keep constant tension.',
+      'Bend elbows to lower bar towards forehead/crown of head.',
+      'Extend elbows to press weight back up to start.'
     ],
-    tips: ['Angling upper arms slightly backwards keeps constant tension on triceps.']
+    tips: ['Incredible mass builder for triceps long head.']
   },
 
   // CORE / ABS
@@ -398,26 +451,30 @@ export const CURATED_EXERCISES: Exercise[] = [
     category: 'core',
     secondaryMuscles: ['forearms'],
     equipment: 'bodyweight',
-    difficulty: 'intermediate',
+    difficulty: 'advanced',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0472.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0472.gif',
     instructions: [
-      'Hang from pull-up bar with overhand grip.',
-      'Brace core and curl knees or straight legs up towards chest.',
-      'Rotate pelvis forward at top to fully contract rectus abdominis.',
+      'Hang from pull-up bar with overhand grip, body still.',
+      'Brace core and raise legs straight out in front until parallel to floor (or higher).',
+      'Roll pelvis slightly upward at top to engage lower abs.',
       'Lower legs slowly without swinging.'
     ],
-    tips: ['To avoid swinging, stop completely at bottom before the next rep.']
+    tips: ['Avoid swinging; if too difficult, bend knees 90 degrees (hanging knee raises).']
   },
   {
     id: 'ex-cable-woodchopper',
-    name: 'Cable Woodchopper (Obliques)',
+    name: 'Cable Woodchopper (Rotational Core)',
     category: 'core',
     secondaryMuscles: ['shoulders'],
     equipment: 'cable',
-    difficulty: 'beginner',
+    difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0246.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0246.gif',
     instructions: [
-      'Set cable handle at high pulley.',
-      'Grip with both hands and rotate torso diagonally downwards across body.',
-      'Pivot on back foot and squeeze obliques.',
+      'Set cable pulley at high position, hold handle with both hands.',
+      'Stand sideways to cable with feet shoulder-width.',
+      'Rotate torso downward and across body towards opposite knee.',
       'Return slowly to starting position.'
     ],
     tips: ['Engage your core to drive the rotational force, not your arms.']
@@ -429,6 +486,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['shoulders', 'glutes'],
     equipment: 'bodyweight',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0469.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0469.gif',
     instructions: [
       'Rest on forearms and toes with elbows directly below shoulders.',
       'Squeeze glutes, pull belly button in towards spine.',
@@ -446,6 +505,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['biceps'],
     equipment: 'barbell',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0125.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0125.gif',
     instructions: [
       'Sit on bench resting forearms on thighs with wrists hanging off knees palms up.',
       'Allow barbell to roll down fingers, then curl fingers and wrists upward.',
@@ -461,6 +522,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['biceps'],
     equipment: 'barbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0080.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0080.gif',
     instructions: [
       'Hold EZ bar with pronated (overhand) grip shoulder width.',
       'Pin elbows to sides and curl bar upwards using brachioradialis.',
@@ -475,6 +538,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['core', 'shoulders'],
     equipment: 'dumbbell',
     difficulty: 'intermediate',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0306.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0306.gif',
     instructions: [
       'Deadlift two heavy dumbbells to standing position.',
       'Brace core, pack lats, look forward.',
@@ -492,6 +557,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: ['hamstrings'],
     equipment: 'cable',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0209.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0209.gif',
     instructions: [
       'Attach ankle cuff to low pulley cable.',
       'Hinge forward slightly holding machine frame for balance.',
@@ -507,6 +574,8 @@ export const CURATED_EXERCISES: Exercise[] = [
     secondaryMuscles: [],
     equipment: 'dumbbell',
     difficulty: 'beginner',
+    imageUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0388.gif',
+    gifUrl: 'https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0388.gif',
     instructions: [
       'Sit on bench with knees bent 90 degrees, resting dumbbells across knees.',
       'Elevate balls of feet on block or plate.',
@@ -516,10 +585,12 @@ export const CURATED_EXERCISES: Exercise[] = [
   }
 ];
 
-// Merge curated exercises and full 876 exercise database, deduplicating IDs
+// Merge curated exercises, full 1324 animated GIF database, and 876 free-exercise-db
+// Deduplicating by ID
 const seenIds = new Set<string>();
 const mergedList: Exercise[] = [];
 
+// 1. First add curated lifts with verified GIFs
 for (const ex of CURATED_EXERCISES) {
   if (!seenIds.has(ex.id)) {
     seenIds.add(ex.id);
@@ -527,6 +598,15 @@ for (const ex of CURATED_EXERCISES) {
   }
 }
 
+// 2. Add 1,324 full-motion animated GIF exercises
+for (const ex of ANIMATED_EXERCISES_DATABASE) {
+  if (!seenIds.has(ex.id)) {
+    seenIds.add(ex.id);
+    mergedList.push(ex);
+  }
+}
+
+// 3. Fallback: Add any remaining from free-exercise-db
 for (const ex of EXERCISES_DATABASE) {
   if (!seenIds.has(ex.id)) {
     seenIds.add(ex.id);
@@ -535,4 +615,3 @@ for (const ex of EXERCISES_DATABASE) {
 }
 
 export const INITIAL_EXERCISES: Exercise[] = mergedList;
-

@@ -12,8 +12,7 @@ import {
   Layers,
   Sparkles,
   Info,
-  ChevronLeft,
-  ChevronRight
+  Maximize2
 } from 'lucide-react';
 
 interface ExerciseDetailModalProps {
@@ -29,40 +28,41 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 }) => {
   if (!exercise) return null;
 
-  // Build the list of frames for animated looping
+  const isRealGif = Boolean(exercise.gifUrl && exercise.gifUrl.endsWith('.gif'));
+  
+  // For fallback multi-frame static exercises (if any)
   const frames = React.useMemo(() => {
-    if (exercise.images && exercise.images.length > 0) {
-      return exercise.images;
-    }
-    const list: string[] = [];
-    if (exercise.imageUrl) list.push(exercise.imageUrl);
-    if (exercise.gifUrl && exercise.gifUrl !== exercise.imageUrl) list.push(exercise.gifUrl);
-    return list;
-  }, [exercise]);
+    if (isRealGif) return [];
+    if (exercise.images && exercise.images.length > 1) return exercise.images;
+    return [];
+  }, [exercise, isRealGif]);
 
   const [activeFrameIndex, setActiveFrameIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [playbackSpeed, setPlaybackSpeed] = useState<number>(900); // ms per frame
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(900);
   const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Auto-looping animation effect between frames (simulates GIF with free-exercise-db 2-phase photos)
+  // Auto-looping timer ONLY for fallback multi-frame exercises
   useEffect(() => {
-    if (!isPlaying || frames.length <= 1) return;
+    if (isRealGif || !isPlaying || frames.length <= 1) return;
 
     const timer = setInterval(() => {
       setActiveFrameIndex((prev) => (prev + 1) % frames.length);
     }, playbackSpeed);
 
     return () => clearInterval(timer);
-  }, [isPlaying, frames.length, playbackSpeed]);
+  }, [isRealGif, isPlaying, frames.length, playbackSpeed]);
 
-  // Reset index when exercise changes
   useEffect(() => {
     setActiveFrameIndex(0);
     setImageError(false);
+    setImageLoaded(false);
   }, [exercise.id]);
 
-  const currentFrameUrl = frames[activeFrameIndex] || exercise.imageUrl || exercise.gifUrl;
+  const displayMediaUrl = isRealGif
+    ? exercise.gifUrl
+    : (frames[activeFrameIndex] || exercise.imageUrl || exercise.gifUrl);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4 animate-fade-in">
@@ -94,61 +94,58 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 
         {/* Content Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-6 flex-1">
-          {/* Animated GIF / Multi-frame Form Visualizer */}
-          {frames.length > 0 && !imageError ? (
+          {/* Animated Full-Motion GIF Form Guide */}
+          {displayMediaUrl && !imageError ? (
             <div className="rounded-3xl overflow-hidden border border-gray-800 bg-gray-950/80 shadow-inner relative group flex flex-col items-center">
-              <div className="w-full aspect-[4/3] sm:aspect-video max-h-72 flex items-center justify-center p-2 relative bg-black/40">
+              <div className="w-full aspect-[4/3] sm:aspect-video max-h-80 flex items-center justify-center p-2 relative bg-black/40">
+                {!imageLoaded && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-900/80">
+                    <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+                    <span className="text-xs text-gray-400 font-semibold">Loading animation...</span>
+                  </div>
+                )}
+
                 <img
-                  src={currentFrameUrl}
-                  alt={`${exercise.name} phase ${activeFrameIndex + 1}`}
-                  className="w-full h-full object-contain transition-opacity duration-300 rounded-2xl"
+                  src={displayMediaUrl}
+                  alt={`${exercise.name} full motion guide`}
+                  className={`w-full h-full object-contain rounded-2xl transition-opacity duration-300 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={() => setImageLoaded(true)}
                   onError={() => setImageError(true)}
                   loading="eager"
                 />
 
-                {/* Looping Phase Badge */}
+                {/* Looping Badge */}
                 <div className="absolute top-3 left-3 px-2.5 py-1 rounded-xl bg-black/80 backdrop-blur text-[11px] font-bold text-orange-400 border border-orange-500/30 flex items-center gap-1.5 shadow-md">
-                  <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span>
-                    {frames.length > 1
-                      ? `Phase ${activeFrameIndex + 1} of ${frames.length}: ${
-                          activeFrameIndex === 0 ? 'Starting Stretch' : 'Peak Contraction'
-                        }`
-                      : 'Form Illustration'}
+                    {isRealGif
+                      ? 'Smooth Full-Motion GIF (Continuous Loop)'
+                      : `Phase ${activeFrameIndex + 1} of ${frames.length}`}
                   </span>
                 </div>
               </div>
 
-              {/* Player Controls Bar */}
-              {frames.length > 1 && (
+              {/* Controls bar for multi-frame fallback */}
+              {!isRealGif && frames.length > 1 && (
                 <div className="w-full px-4 py-2.5 bg-gray-900/90 border-t border-gray-800 flex items-center justify-between gap-3 text-xs">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setIsPlaying((p) => !p)}
                       className="px-3 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold border border-orange-500/30 flex items-center gap-1.5 transition-colors"
                     >
-                      {isPlaying ? (
-                        <>
-                          <Pause className="w-3.5 h-3.5" />
-                          <span>Pause Loop</span>
-                        </>
-                      ) : (
-                        <>
-                          <Play className="w-3.5 h-3.5 fill-orange-400" />
-                          <span>Play Loop</span>
-                        </>
-                      )}
+                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-orange-400" />}
+                      <span>{isPlaying ? 'Pause' : 'Play'}</span>
                     </button>
-
                     <button
                       onClick={() => setPlaybackSpeed((s) => (s === 900 ? 1500 : 900))}
-                      className="px-2.5 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-750 text-gray-300 font-semibold border border-gray-700 text-[11px] transition-colors"
+                      className="px-2.5 py-1.5 rounded-xl bg-gray-800 text-gray-300 font-semibold border border-gray-700 text-[11px]"
                     >
-                      Speed: {playbackSpeed === 900 ? '1x' : '0.6x Slow'}
+                      {playbackSpeed === 900 ? '1x' : '0.6x Slow'}
                     </button>
                   </div>
 
-                  {/* Frame switch buttons */}
                   <div className="flex items-center gap-1">
                     {frames.map((_, i) => (
                       <button
@@ -157,10 +154,8 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                           setActiveFrameIndex(i);
                           setIsPlaying(false);
                         }}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
-                          activeFrameIndex === i
-                            ? 'bg-orange-500 text-white shadow-sm'
-                            : 'bg-gray-800 text-gray-400 hover:text-white'
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold ${
+                          activeFrameIndex === i ? 'bg-orange-500 text-white' : 'bg-gray-800 text-gray-400'
                         }`}
                       >
                         {i === 0 ? '1 (Start)' : '2 (Lockout)'}

@@ -151,16 +151,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   });
 
-  // Exercises (850+ from free-exercise-db + curated starter exercises)
+  // Exercises (1,350+ smooth full-motion animated GIFs + curated staple lifts)
   const [exercises, setExercises] = useState<Exercise[]>(() => {
     const saved = localStorage.getItem('fitrack_exercises');
     if (saved) {
       try {
         const parsed: Exercise[] = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length >= INITIAL_EXERCISES.length) {
+        // If cached list is missing animated GIFs on staple lifts or has older/smaller library, upgrade it!
+        const hasGifs = Array.isArray(parsed) && parsed.length > 0 && Boolean(parsed[0]?.gifUrl);
+        if (hasGifs && parsed.length >= INITIAL_EXERCISES.length) {
           return parsed;
         } else if (Array.isArray(parsed)) {
-          // Preserve custom user-added exercises while upgrading to 850+ library
+          // Preserve custom user-added exercises while upgrading to 1,350+ animated GIF library
           const custom = parsed.filter((e) => e.isCustom);
           return [...INITIAL_EXERCISES, ...custom];
         }
