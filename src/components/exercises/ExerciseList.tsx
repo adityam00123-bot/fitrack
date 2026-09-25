@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Exercise, MuscleGroup, Equipment } from '../../types/workout';
 import { ExerciseDetailModal } from './ExerciseDetailModal';
@@ -17,7 +17,8 @@ import {
   ChevronDown,
   ChevronUp,
   SlidersHorizontal,
-  Flame
+  Flame,
+  Play
 } from 'lucide-react';
 
 export const ExerciseList: React.FC = () => {
@@ -30,6 +31,12 @@ export const ExerciseList: React.FC = () => {
   const [isMapVisible, setIsMapVisible] = useState(true);
   const [activeModalExercise, setActiveModalExercise] = useState<Exercise | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(36);
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setVisibleCount(36);
+  }, [search, selectedMuscle, selectedEquipment, selectedDifficulty]);
 
   // Compute live exercise counts per muscle group
   const exerciseCounts = useMemo(() => {
@@ -61,7 +68,10 @@ export const ExerciseList: React.FC = () => {
     { id: 'dumbbell', label: 'Dumbbell' },
     { id: 'cable', label: 'Cable' },
     { id: 'machine', label: 'Machine' },
-    { id: 'bodyweight', label: 'Bodyweight' }
+    { id: 'bodyweight', label: 'Bodyweight' },
+    { id: 'kettlebell', label: 'Kettlebell' },
+    { id: 'resistance_band', label: 'Bands' },
+    { id: 'other', label: 'Other' }
   ];
 
   const difficulties = [
@@ -75,6 +85,7 @@ export const ExerciseList: React.FC = () => {
     return exercises.filter((ex) => {
       const q = search.toLowerCase();
       const matchesSearch =
+        !q ||
         ex.name.toLowerCase().includes(q) ||
         ex.category.toLowerCase().includes(q) ||
         ex.equipment.toLowerCase().includes(q) ||
@@ -88,6 +99,10 @@ export const ExerciseList: React.FC = () => {
     });
   }, [exercises, search, selectedMuscle, selectedEquipment, selectedDifficulty]);
 
+  const visibleExercises = useMemo(() => {
+    return filtered.slice(0, visibleCount);
+  }, [filtered, visibleCount]);
+
   return (
     <div className="space-y-6">
       {/* Top Header */}
@@ -100,7 +115,7 @@ export const ExerciseList: React.FC = () => {
             </span>
           </h1>
           <p className="text-xs text-gray-400 mt-1">
-            Workout.Cool interactive anatomical body heatmap & comprehensive form cues
+            Workout.Cool interactive anatomical body heatmap & comprehensive form cues with animations
           </p>
         </div>
 
@@ -141,7 +156,7 @@ export const ExerciseList: React.FC = () => {
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
-            placeholder="Search exercises by name, muscle (Chest, Lats, Quads) or gear (Barbell, Cable)..."
+            placeholder="Search 870+ exercises by name, muscle (Chest, Lats, Quads) or gear (Barbell, Cable, Kettlebell)..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-gray-850 border border-gray-700/80 text-white text-sm focus:border-orange-500 focus:outline-none transition-colors"
@@ -179,7 +194,7 @@ export const ExerciseList: React.FC = () => {
         {/* Secondary Filters (Gear & Difficulty) */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-gray-800/80 text-xs">
           {/* Equipment filters */}
-          <div className="flex items-center gap-1.5 overflow-x-auto">
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span className="text-gray-500 text-[11px] font-semibold uppercase tracking-wider mr-1">Gear:</span>
             {equipments.map((eq) => (
               <button
@@ -219,7 +234,7 @@ export const ExerciseList: React.FC = () => {
       {/* Results Count Banner */}
       <div className="flex items-center justify-between px-1 text-xs text-gray-400">
         <span>
-          Showing <strong className="text-white">{filtered.length}</strong> matching exercises
+          Showing <strong className="text-white">{Math.min(visibleCount, filtered.length)}</strong> of <strong className="text-white">{filtered.length}</strong> matching exercises
           {selectedMuscle !== 'all' && (
             <span> for <span className="text-orange-400 font-semibold capitalize">{selectedMuscle}</span></span>
           )}
@@ -264,7 +279,7 @@ export const ExerciseList: React.FC = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((exercise) => (
+          {visibleExercises.map((exercise) => (
             <div
               key={exercise.id}
               onClick={() => setActiveModalExercise(exercise)}
@@ -291,13 +306,34 @@ export const ExerciseList: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-base sm:text-lg font-black text-white group-hover:text-orange-300 transition-colors leading-snug">
-                  {exercise.name}
-                </h3>
+                <div className="flex items-start gap-3">
+                  {exercise.imageUrl && (
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-gray-950 border border-gray-800 shrink-0 flex items-center justify-center relative group-hover:border-orange-500/30 transition-colors">
+                      <img
+                        src={exercise.imageUrl}
+                        alt={exercise.name}
+                        className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      {(exercise.images && exercise.images.length > 1) && (
+                        <div className="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-black/80 text-[8px] font-black text-orange-400 flex items-center gap-0.5 border border-orange-500/30">
+                          <Play className="w-2 h-2 fill-orange-400" />
+                          <span>GIF</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
-                <p className="text-xs text-gray-400 line-clamp-2 mt-2 leading-relaxed">
-                  {exercise.instructions[0]}
-                </p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base sm:text-lg font-black text-white group-hover:text-orange-300 transition-colors leading-snug line-clamp-2">
+                      {exercise.name}
+                    </h3>
+
+                    <p className="text-xs text-gray-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      {exercise.instructions[0]}
+                    </p>
+                  </div>
+                </div>
 
                 {exercise.secondaryMuscles && exercise.secondaryMuscles.length > 0 && (
                   <div className="mt-3 flex items-center gap-1.5 flex-wrap">
@@ -311,9 +347,9 @@ export const ExerciseList: React.FC = () => {
                 )}
               </div>
 
-              <div className="mt-5 pt-3.5 border-t border-gray-800/80 flex items-center justify-between gap-2">
+              <div className="mt-4 pt-3 border-t border-gray-800/80 flex items-center justify-between gap-2">
                 <span className="text-[11px] text-gray-400 flex items-center gap-1 group-hover:text-orange-400 transition-colors font-medium">
-                  <Info className="w-3.5 h-3.5" /> View Form Cues
+                  <Info className="w-3.5 h-3.5" /> View Form Cues & Animation
                 </span>
 
                 {activeWorkout && (
@@ -330,6 +366,21 @@ export const ExerciseList: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Pagination Load More */}
+      {filtered.length > visibleCount && (
+        <div className="text-center pt-4 pb-8">
+          <button
+            onClick={() => setVisibleCount((prev) => prev + 36)}
+            className="px-6 py-3 rounded-2xl bg-gray-850 hover:bg-gray-800 text-white font-extrabold text-xs border border-gray-750 transition-all shadow-md hover:border-orange-500/40 inline-flex items-center gap-2"
+          >
+            <span>Load More Exercises (+36)</span>
+            <span className="text-gray-400 font-normal">
+              ({filtered.length - visibleCount} remaining)
+            </span>
+          </button>
         </div>
       )}
 

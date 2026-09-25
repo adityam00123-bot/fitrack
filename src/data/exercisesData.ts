@@ -1,6 +1,7 @@
 import { Exercise } from '../types/workout';
+import { EXERCISES_DATABASE } from './exercisesDatabase';
 
-export const INITIAL_EXERCISES: Exercise[] = [
+export const CURATED_EXERCISES: Exercise[] = [
   // CHEST
   {
     id: 'ex-bench-press',
@@ -483,22 +484,7 @@ export const INITIAL_EXERCISES: Exercise[] = [
     tips: ['Incredible grip strength and forearm endurance builder.']
   },
 
-  // GLUTES
-  {
-    id: 'ex-hip-thrust',
-    name: 'Barbell Hip Thrust',
-    category: 'glutes',
-    secondaryMuscles: ['hamstrings', 'quads'],
-    equipment: 'barbell',
-    difficulty: 'intermediate',
-    instructions: [
-      'Sit on floor with upper back against bench, barbell padded across hips.',
-      'Plant feet flat shoulder-width apart, shins vertical at top.',
-      'Drive through heels and extend hips fully upwards.',
-      'Squeeze glutes at top lockout for 1 second, then lower under control.'
-    ],
-    tips: ['Tuck chin and look forward at lockout to prevent lower back hyperextension.']
-  },
+  // GLUTES & ACCESSORIES
   {
     id: 'ex-cable-kickback',
     name: 'Glute Cable Kickback',
@@ -513,39 +499,6 @@ export const INITIAL_EXERCISES: Exercise[] = [
       'Control return without letting weight stack touch.'
     ],
     tips: ['Keep hips square to the cable tower without rotating pelvis.']
-  },
-
-  // HAMSTRINGS
-  {
-    id: 'ex-seated-leg-curl',
-    name: 'Seated Hamstring Leg Curl',
-    category: 'hamstrings',
-    secondaryMuscles: ['calves'],
-    equipment: 'machine',
-    difficulty: 'beginner',
-    instructions: [
-      'Adjust seat so knee joint aligns with machine pivot axis.',
-      'Secure thigh pad snugly down against quads.',
-      'Flex hamstrings and curl heel pad under seat as far as possible.',
-      'Slowly resist weight stack on 3-second extension.'
-    ],
-    tips: ['Point toes towards shins (dorsiflexion) to maximize hamstring recruitment.']
-  },
-
-  // CALVES
-  {
-    id: 'ex-standing-calf-raise',
-    name: 'Standing Barbell / Machine Calf Raise',
-    category: 'calves',
-    secondaryMuscles: [],
-    equipment: 'machine',
-    difficulty: 'beginner',
-    instructions: [
-      'Place balls of feet on platform ledge, heels hanging off.',
-      'Lower heels deep for a full gastrocnemius stretch (hold 2 seconds).',
-      'Explode onto big toes and hold peak contraction for 1 second.'
-    ],
-    tips: ['Never bounce at bottom of calf raises; pause to eliminate Achilles tendon elasticity.']
   },
   {
     id: 'ex-seated-calf-raise',
@@ -562,3 +515,24 @@ export const INITIAL_EXERCISES: Exercise[] = [
     tips: ['Bent knee position isolates the deeper soleus calf muscle.']
   }
 ];
+
+// Merge curated exercises and full 876 exercise database, deduplicating IDs
+const seenIds = new Set<string>();
+const mergedList: Exercise[] = [];
+
+for (const ex of CURATED_EXERCISES) {
+  if (!seenIds.has(ex.id)) {
+    seenIds.add(ex.id);
+    mergedList.push(ex);
+  }
+}
+
+for (const ex of EXERCISES_DATABASE) {
+  if (!seenIds.has(ex.id)) {
+    seenIds.add(ex.id);
+    mergedList.push(ex);
+  }
+}
+
+export const INITIAL_EXERCISES: Exercise[] = mergedList;
+

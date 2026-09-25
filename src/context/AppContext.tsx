@@ -151,11 +151,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   });
 
-  // Exercises
+  // Exercises (850+ from free-exercise-db + curated starter exercises)
   const [exercises, setExercises] = useState<Exercise[]>(() => {
     const saved = localStorage.getItem('fitrack_exercises');
     if (saved) {
-      try { return JSON.parse(saved); } catch { /* ignore */ }
+      try {
+        const parsed: Exercise[] = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length >= INITIAL_EXERCISES.length) {
+          return parsed;
+        } else if (Array.isArray(parsed)) {
+          // Preserve custom user-added exercises while upgrading to 850+ library
+          const custom = parsed.filter((e) => e.isCustom);
+          return [...INITIAL_EXERCISES, ...custom];
+        }
+      } catch { /* ignore */ }
     }
     return INITIAL_EXERCISES;
   });
