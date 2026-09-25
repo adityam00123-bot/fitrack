@@ -154,10 +154,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Exercises (1,350+ smooth full-motion animated GIFs + curated staple lifts with 60FPS MP4 videos)
   const [exercises, setExercises] = useState<Exercise[]>(() => {
     const saved = localStorage.getItem('fitrack_exercises');
-    const CACHE_VERSION_KEY = 'fitrack_exercises_v3_videos';
-    const hasV3 = localStorage.getItem(CACHE_VERSION_KEY);
+    const CACHE_VERSION_KEY = 'fitrack_exercises_v4_strict_videos';
+    const hasV4 = localStorage.getItem(CACHE_VERSION_KEY);
 
-    if (saved && hasV3) {
+    if (saved && hasV4) {
       try {
         const parsed: Exercise[] = JSON.parse(saved);
         // Ensure cache has 60fps videoUrl on staple lifts and full library size
@@ -168,7 +168,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       } catch { /* ignore */ }
     }
 
-    // Auto-upgrade cache to ensure 60fps videos and full library are populated
+    // Auto-upgrade cache to ensure strict 60fps videos and full library are populated
     try {
       let custom: Exercise[] = [];
       if (saved) {
