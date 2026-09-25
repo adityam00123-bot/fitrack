@@ -5,6 +5,7 @@ import { Sidebar } from './components/common/Sidebar';
 import { BottomNav } from './components/common/BottomNav';
 import { RestTimerWidget } from './components/common/RestTimerWidget';
 import { QuickAddModal } from './components/common/QuickAddModal';
+import { PwaInstallPrompt } from './components/common/PwaInstallPrompt';
 import { WorkoutToolsModal } from './components/tools/WorkoutToolsModal';
 import { SupabaseSettingsModal } from './components/tools/SupabaseSettingsModal';
 
@@ -51,8 +52,9 @@ const MainLayout: React.FC = () => {
       {/* Mobile Bottom Navigation */}
       <BottomNav />
 
-      {/* Modals */}
+      {/* Modals & Prompts */}
       <QuickAddModal />
+      <PwaInstallPrompt />
       <WorkoutToolsModal
         isOpen={isToolsModalOpen}
         onClose={() => setIsToolsModalOpen(false)}

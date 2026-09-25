@@ -1,0 +1,42 @@
+{
+  "name": "FITRACK — Indian Lifter Fitness & Diet Tracker",
+  "short_name": "FITRACK",
+  "description": "All-in-one workout logger, exercise database, Indian diet planner, and body tracker.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b0d13",
+  "theme_color": "#f97316",
+  "categories": ["fitness", "health", "lifestyle", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Workout",
+      "url": "/?tab=workouts",
+      "description": "Launch live gym workout logger"
+    },
+    {
+      "name": "Daily Macros",
+      "url": "/?tab=nutrition",
+      "description": "Track daily calories & protein"
+    },
+    {
+      "name": "Indian Diet",
+      "url": "/?tab=indian_diet",
+      "description": "View 7-day budget meal plans"
+    }
+  ]
+}
